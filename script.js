@@ -2,6 +2,26 @@
    NURI ぬり — Script
    =========================== */
 
+// ===== Theme Toggle =====
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+// Check for saved theme or system preference
+const savedTheme = localStorage.getItem('theme');
+const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+if (savedTheme === 'light' || (!savedTheme && systemPrefersLight)) {
+    body.classList.add('light-mode');
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        const newTheme = body.classList.contains('light-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+    });
+}
+
 // ===== Navigation scroll effect =====
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
@@ -84,16 +104,9 @@ if (form) {
 
         const formAction = form.getAttribute('action');
 
-        // If Formspree ID not yet set, fall back to mailto
+        // If Formspree ID not yet set, alert the user
         if (formAction.includes('YOUR_FORM_ID')) {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            const body = encodeURIComponent(
-                `Name: ${name}\nEmail: ${email}\nProject Type: ${subject}\n\n${message}`
-            );
-            window.location.href = `mailto:leidenfrostconsulting@gmail.com?subject=Project Enquiry from ${encodeURIComponent(name)}&body=${body}`;
+            alert('Please configure the Formspree Form ID in index.html to enable email sending without an email app.');
             return;
         }
 

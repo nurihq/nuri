@@ -21,6 +21,62 @@
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --font: 'Inter', sans-serif;
     --font-jp: 'Noto Sans JP', sans-serif;
+
+    /* Light Mode Variables */
+    --bg-light: #f8fafc;
+    --bg-2-light: #f1f5f9;
+    --bg-card-light: #ffffff;
+    --text-light: #0f172a;
+    --text-muted-light: #475569;
+    --text-dim-light: #64748b;
+    --border-light: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode {
+    --bg: var(--bg-light);
+    --bg-2: var(--bg-2-light);
+    --bg-card: var(--bg-card-light);
+    --bg-card-hover: #ffffff;
+    --text: var(--text-light);
+    --text-muted: var(--text-muted-light);
+    --text-dim: var(--text-dim-light);
+    --border: var(--border-light);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0;
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(139, 92, 246, 0.05);
+}
+
+.theme-icon-light,
+.theme-icon-dark {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+body:not(.light-mode) .theme-icon-dark {
+    display: none;
+}
+
+body.light-mode .theme-icon-light {
+    display: none;
 }
 
 *,
@@ -547,7 +603,9 @@ body {
 }
 
 .card-image-castaways {
-    background: linear-gradient(135deg, #1a1a3e 0%, #2d1b69 50%, #1e3a5f 100%);
+    background: radial-gradient(circle at 10% 20%, #4c1d95 0%, transparent 50%),
+        radial-gradient(circle at 90% 90%, #1e3a8a 0%, transparent 50%),
+        #0f172a;
 }
 
 .card-image-castaways::after {
@@ -559,12 +617,15 @@ body {
     justify-content: center;
     font-size: 1.1rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.05em;
+    z-index: 1;
 }
 
 .card-image-katie {
-    background: linear-gradient(135deg, #2d1b1b 0%, #4a1942 50%, #1b2d2d 100%);
+    background: radial-gradient(circle at 80% 10%, #be123c 0%, transparent 40%),
+        radial-gradient(circle at 20% 90%, #831843 0%, transparent 50%),
+        #2a0a18;
 }
 
 .card-image-katie::after {
@@ -576,12 +637,14 @@ body {
     justify-content: center;
     font-size: 1.1rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.05em;
+    z-index: 1;
 }
 
 .card-image-hiragana {
-    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    background: radial-gradient(circle at 50% 100%, #5b21b6 0%, transparent 60%),
+        #111827;
 }
 
 .card-image-hiragana::after {
@@ -593,13 +656,22 @@ body {
     justify-content: center;
     font-size: 1.1rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.05em;
     font-family: var(--font-jp);
+    z-index: 1;
 }
 
 .card-image-katakana {
-    background: linear-gradient(135deg, #1a0533 0%, #2d1b69 50%, #0d1b2a 100%);
+    background: linear-gradient(135deg, #000 0%, #1e1b4b 100%);
+    position: relative;
+}
+
+.card-image-katakana::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(139, 92, 246, 0.03) 10px, rgba(139, 92, 246, 0.03) 20px);
 }
 
 .card-image-katakana::after {
@@ -611,24 +683,23 @@ body {
     justify-content: center;
     font-size: 1.1rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.05em;
     font-family: var(--font-jp);
+    z-index: 1;
 }
 
 .card-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(139, 92, 246, 0.85);
+    background: rgba(139, 92, 246, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: var(--transition);
-}
-
-.portfolio-card:hover .card-overlay {
-    opacity: 1;
+    z-index: 10;
+    cursor: default;
 }
 
 .card-visit-btn {
@@ -640,6 +711,9 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.6);
     border-radius: 50px;
     transition: var(--transition);
+    position: relative;
+    z-index: 20;
+    cursor: pointer;
 }
 
 .card-visit-btn:hover {
