@@ -517,7 +517,7 @@ body {
 /* ===== Portfolio ===== */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 28px;
 }
 
@@ -578,6 +578,42 @@ body {
     font-weight: 600;
     color: rgba(255, 255, 255, 0.5);
     letter-spacing: 0.05em;
+}
+
+.card-image-hiragana {
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+}
+
+.card-image-hiragana::after {
+    content: 'あ Hiragana.site';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.05em;
+    font-family: var(--font-jp);
+}
+
+.card-image-katakana {
+    background: linear-gradient(135deg, #1a0533 0%, #2d1b69 50%, #0d1b2a 100%);
+}
+
+.card-image-katakana::after {
+    content: 'ア Katakana.site';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.05em;
+    font-family: var(--font-jp);
 }
 
 .card-overlay {
