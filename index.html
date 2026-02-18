@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuri ぬり — Web Development</title>
+    <meta name="description"
+        content="Nuri ぬり is a premium web development studio crafting beautiful, high-performance websites for businesses that want to stand out." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-en">Nuri</span>
+                <span class="logo-jp">ぬり</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-orb orb-1"></div>
+            <div class="hero-orb orb-2"></div>
+            <div class="hero-orb orb-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge reveal">Web Development Studio</div>
+            <h1 class="hero-title reveal">
+                <span class="title-en">Nuri</span>
+                <span class="title-jp">ぬり</span>
+            </h1>
+            <p class="hero-tagline reveal">We paint the web with purpose.</p>
+            <p class="hero-sub reveal">Premium websites crafted for businesses that demand excellence — beautiful
+                design, flawless performance, and results that matter.</p>
+            <div class="hero-actions reveal">
+                <a href="#portfolio" class="btn btn-primary">View Our Work</a>
+                <a href="#contact" class="btn btn-ghost">Start a Project</a>
+            </div>
+        </div>
+        <div class="hero-scroll-hint">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="section-label reveal">About</div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2 class="section-title reveal">Crafting digital experiences that leave a mark.</h2>
+                    <p class="reveal">Nuri — Japanese for <em>paint</em> — embodies our philosophy: every website is a
+                        canvas. We blend artistry with engineering to build sites that are as beautiful as they are
+                        powerful.</p>
+                    <p class="reveal">From local restaurants to growing businesses, we deliver bespoke web solutions
+                        with meticulous attention to detail, fast load times, and designs that convert visitors into
+                        customers.</p>
+                    <div class="about-stats reveal">
+                        <div class="stat">
+                            <span class="stat-num">100%</span>
+                            <span class="stat-label">Custom Design</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-num">Fast</span>
+                            <span class="stat-label">Performance First</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-num">∞</span>
+                            <span class="stat-label">Passion for Craft</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual reveal">
+                    <div class="kanji-card">
+                        <div class="kanji-char">ぬり</div>
+                        <div class="kanji-meaning">paint · coat · lacquer</div>
+                        <div class="kanji-romaji">nuri</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="portfolio section" id="portfolio">
+        <div class="container">
+            <div class="section-label reveal">Portfolio</div>
+            <h2 class="section-title reveal">Sites we've brought to life.</h2>
+            <p class="section-sub reveal">Each project is built from scratch — no templates, no shortcuts. Just clean
+                code and thoughtful design.</p>
+            <div class="portfolio-grid">
+
+                <article class="portfolio-card reveal" id="card-castaways">
+                    <div class="card-image-wrap">
+                        <div class="card-image card-image-castaways">
+                            <div class="card-overlay">
+                                <a href="https://nurihq.github.io/castaways-cafe" target="_blank" rel="noopener"
+                                    class="card-visit-btn">Visit Site ↗</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-tags">
+                            <span class="tag">Restaurant</span>
+                            <span class="tag">React</span>
+                            <span class="tag">Vite</span>
+                        </div>
+                        <h3 class="card-title">Castaways Cafe</h3>
+                        <p class="card-desc">A vibrant, full-featured website for a beloved local cafe — featuring an
+                            interactive menu, gallery, and seamless online presence.</p>
+                        <a href="https://nurihq.github.io/castaways-cafe" target="_blank" rel="noopener"
+                            class="card-link">
+                            nurihq.github.io/castaways-cafe <span class="link-arrow">↗</span>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="portfolio-card reveal" id="card-katie">
+                    <div class="card-image-wrap">
+                        <div class="card-image card-image-katie">
+                            <div class="card-overlay">
+                                <a href="https://nurihq.github.io/katie-cakes" target="_blank" rel="noopener"
+                                    class="card-visit-btn">Visit Site ↗</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-tags">
+                            <span class="tag">Bakery</span>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                        <h3 class="card-title">Katie Cakes</h3>
+                        <p class="card-desc">A warm, elegant website for a boutique cake studio — showcasing their
+                            beautiful creations and making it easy for customers to get in touch.</p>
+                        <a href="https://nurihq.github.io/katie-cakes" target="_blank" rel="noopener" class="card-link">
+                            nurihq.github.io/katie-cakes <span class="link-arrow">↗</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Placeholder card -->
+                <article class="portfolio-card portfolio-card-cta reveal">
+                    <div class="card-cta-inner">
+                        <div class="card-cta-icon">+</div>
+                        <h3>Your Project Here</h3>
+                        <p>Ready to build something exceptional? Let's talk.</p>
+                        <a href="#contact" class="btn btn-primary btn-sm">Get Started</a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services section" id="services">
+        <div class="container">
+            <div class="section-label reveal">Services</div>
+            <h2 class="section-title reveal">Everything you need to succeed online.</h2>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">◈</div>
+                    <h3>Custom Design</h3>
+                    <p>Bespoke visual identities and interfaces tailored to your brand — no templates, no compromises.
+                    </p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">⚡</div>
+                    <h3>Web Development</h3>
+                    <p>Clean, modern code built for speed, accessibility, and long-term maintainability.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">📱</div>
+                    <h3>Responsive &amp; Mobile</h3>
+                    <p>Pixel-perfect experiences across every device — from desktop to the smallest screen.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">🚀</div>
+                    <h3>Hosting &amp; Deployment</h3>
+                    <p>Fast, reliable hosting setup with continuous deployment — your site is always live and up to
+                        date.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">🔍</div>
+                    <h3>SEO Optimisation</h3>
+                    <p>Built-in best practices to help your business get found by the right people at the right time.
+                    </p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">🛠</div>
+                    <h3>Ongoing Support</h3>
+                    <p>Updates, improvements, and peace of mind — we're here long after launch day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="section-label reveal">Contact</div>
+            <h2 class="section-title reveal">Let's build something together.</h2>
+            <p class="section-sub reveal">Have a project in mind? We'd love to hear about it. Fill in the form below and
+                we'll get back to you within 24 hours.</p>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <div class="contact-detail">
+                        <span class="contact-icon">✉</span>
+                        <div>
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:leidenfrostconsulting@gmail.com"
+                                class="contact-value">leidenfrostconsulting@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="contact-icon">🌐</span>
+                        <div>
+                            <span class="contact-label">GitHub</span>
+                            <a href="https://github.com/nurihq" target="_blank" rel="noopener"
+                                class="contact-value">github.com/nurihq</a>
+                        </div>
+                    </div>
+                    <div class="contact-tagline">
+                        <p>We respond to every enquiry personally. No bots, no templates — just a real conversation
+                            about your vision.</p>
+                    </div>
+                </div>
+                <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID"
+                    method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Project Type</label>
+                        <select id="subject" name="subject">
+                            <option value="">Select a service...</option>
+                            <option value="new-website">New Website</option>
+                            <option value="redesign">Website Redesign</option>
+                            <option value="ecommerce">E-Commerce</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tell Us About Your Project</label>
+                        <textarea id="message" name="message" rows="5"
+                            placeholder="Describe your project, goals, timeline..." required></textarea>
+                    </div>
+                    <input type="hidden" name="_subject" value="New project enquiry from Nuri website" />
+                    <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                    <div class="form-success" id="formSuccess">
+                        <span>✓</span> Thanks! We'll be in touch within 24 hours.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <span class="logo-en">Nuri</span>
+                    <span class="logo-jp">ぬり</span>
+                </div>
+                <p class="footer-tagline">We paint the web with purpose.</p>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <p class="footer-copy">© 2026 Nuri. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
