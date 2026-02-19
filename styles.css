@@ -589,6 +589,7 @@ body {
     /* Ensure it behaves like a block */
     color: inherit;
     /* Inherit text color */
+    cursor: pointer;
 }
 
 /* Pricing Syle */
@@ -729,7 +730,7 @@ body {
     opacity: 0;
     transition: var(--transition);
     z-index: 10;
-    cursor: default;
+    cursor: pointer;
 }
 
 .card-visit-btn {
