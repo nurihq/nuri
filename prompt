@@ -1,0 +1,60 @@
+
+
+
+
+
+Phase 1:
+
+I would like a new webapp in the websites folder
+1. Create the folder and the app and push to github using gh cli tool
+2. host it as a github pages site, and return the url of the site
+3. Use the url of the site and add to the nuri site portfolio section and push the nuri site
+4. Use the gcloud cli tool to push an account to the Nuri Property with the business name and use the new measurement ID to set up google analytics for the site.
+
+The site is for the business located below.
+https://www.instagram.com/collectionmargaliti
+
+
+Special features of this site:
+1. App should be in georgian by default, with a button to toggle between georgian and english (look at how it was done in the mao app)
+2. If they are listed on a local food delivery network, link to that
+3. Link to facebook and instagram and anything else
+4. I want the landing to be unique and cool and tailored to the business
+5. I want some menu items listed with real photos from their online presence, bonus if you can link to the items in their food delivery partner app.
+  5.1 Please make extra certain the images match the descriptions and the links are correct.
+
+Please create a checklist and ensure you don't leave anything else
+
+
+
+
+
+
+
+Phase 2:
+
+Also tailor this email to the business
+
+Subject: I built a preview of a new website for [Business Name]
+
+Hi [Owner Name or "Team"],
+
+I was looking at your Google Maps listing and noticed you don’t have a dedicated website.
+
+Since you have such great reviews, I took the liberty of putting together a modern, fast-loading homepage for [Business Name] to show you what a professional digital presence could look like.
+
+You can view the preview here: [Link to Mockup/Draft]
+
+I build these specifically for local service businesses. My model is simple:
+
+$50 one-time setup: This covers the initial build and getting everything live.
+
+$5/month hosting: This keeps the site online, secure, and lightning-fast.
+
+There is no long-term contract or hidden fees. I just want to help local businesses get a professional edge without the agency price tag.
+
+If you like the look of it, I can have the full site live on your own domain by tomorrow. If not, no hard feelings!
+
+Best regards,
+
+Andrew from Nuri [links to nuri.software]
