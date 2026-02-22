@@ -1,0 +1,36 @@
+# Nuri ぬり — Web Development Studio
+
+> We paint the web with purpose.
+
+Nuri is a premium web development studio crafting beautiful, high-performance, and custom-designed websites for businesses that demand excellence. The name "Nuri" comes from the Japanese word for *paint* (ぬり), reflecting the studio's philosophy: every website is a canvas. Nuri blends artistry with meticulous engineering to build sites that are as beautiful as they are powerful.
+
+## Core Services
+*   **Custom Design:** Bespoke visual identities and interfaces tailored to the client's brand. No templates.
+*   **Web Development:** Clean, modern code built for speed, accessibility, and long-term maintainability.
+*   **Responsive & Mobile:** Pixel-perfect experiences across all devices.
+*   **Hosting & Deployment:** Fast, reliable hosting setup with continuous deployment.
+*   **SEO Optimisation:** Built-in best practices for maximum search engine visibility.
+*   **Ongoing Support:** Technical support, monthly content updates, and 24/7 uptime monitoring.
+
+## Pricing Structure
+*   **Design & Build:** Starts at $50 (one-time fee). Includes custom design, development, SEO, domain configuration, and launch support.
+*   **Care & Hosting:** Starts at $5/month. Includes secure hosting, continuous updates, technical support, and uptime monitoring.
+
+## Target Audience
+Nuri partners with businesses that want a standout digital presence, ranging from local restaurants and cafes to boutique shops and e-commerce platforms. 
+
+## Portfolio Highlights
+*   **Castaways Cafe:** A vibrant, full-featured website for a local cafe. Built with React and Vite. (Restaurant workflow)
+*   **Katie Cakes:** A warm, elegant website for a boutique cake studio. Built with HTML & CSS. (Bakery workflow)
+*   **Warren Cafe & Brunch:** A premium bilingual website for a Buenos Aires brunch café.
+*   **Margaliti Collection:** A premium bilingual website for Tbilisi's boutique Cheese Bar.
+*   **Mao Bubble Tea:** A super cute, fun, and funky website with playful animations for Tbilisi's premier bubble tea shop.
+*   **Hiragana.site / Katakana.site:** Interactive, progressive web apps (PWAs) with offline support for practicing Japanese character writing. Built with Firebase. (Educational tools)
+
+## Mission Statement
+"From local restaurants to growing businesses, we deliver bespoke web solutions with meticulous attention to detail, fast load times, and designs that convert visitors into customers."
+
+## Contact Information
+*   **Website:** https://nurihq.github.io/
+*   **Form:** A secure contact form is available directly on the homepage for all project inquiries.
+*   **Project Types Handled:** New Websites, Website Redesigns, E-Commerce, Custom Web Apps.
