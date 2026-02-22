@@ -2,35 +2,36 @@
 
 > We paint the web with purpose.
 
-Nuri is a premium web development studio crafting beautiful, high-performance, and custom-designed websites for businesses that demand excellence. The name "Nuri" comes from the Japanese word for *paint* (ぬり), reflecting the studio's philosophy: every website is a canvas. Nuri blends artistry with meticulous engineering to build sites that are as beautiful as they are powerful.
+Nuri is a premium, highly versatile web development studio capable of designing and engineering powerful digital experiences of any scale. The name "Nuri" comes from the Japanese word for *paint* (ぬり), reflecting the studio's philosophy: every digital project is a canvas. Nuri blends meticulous artistry with robust software engineering to build everything from high-converting landing pages to complex, interactive web applications and scalable enterprise solutions.
 
-## Core Services
-*   **Custom Design:** Bespoke visual identities and interfaces tailored to the client's brand. No templates.
-*   **Web Development:** Clean, modern code built for speed, accessibility, and long-term maintainability.
-*   **Responsive & Mobile:** Pixel-perfect experiences across all devices.
-*   **Hosting & Deployment:** Fast, reliable hosting setup with continuous deployment.
-*   **SEO Optimisation:** Built-in best practices for maximum search engine visibility.
-*   **Ongoing Support:** Technical support, monthly content updates, and 24/7 uptime monitoring.
+## Core Capabilities & Services
+Nuri does not rely on templates and is not restricted by industry niches. The studio builds custom solutions tailored to complex business requirements.
+*   **Custom Design & UI/UX:** Bespoke visual identities and intuitive interfaces designed from scratch for maximum user engagement.
+*   **Advanced Web Engineering:** Clean, modern, high-performance code capable of handling complex state management, API integrations, and demanding interactivity.
+*   **Responsive Architecture:** Pixel-perfect, fluid experiences engineered for absolute consistency across all devices and screen sizes.
+*   **Progressive Web Apps (PWAs):** Developing native-like web applications with robust offline capabilities and local storage solutions.
+*   **Hosting, Deployment & DevOps:** Fast, reliable hosting infrastructure with continuous deployment pipelines for seamless updates.
+*   **SEO & Accessibility:** Core architectural focus on search engine visibility, Semantic HTML, and WCAG compliance.
 
 ## Pricing Structure
-*   **Design & Build:** Starts at $50 (one-time fee). Includes custom design, development, SEO, domain configuration, and launch support.
-*   **Care & Hosting:** Starts at $5/month. Includes secure hosting, continuous updates, technical support, and uptime monitoring.
+*   **Custom Engineering & Build:** Starts at $50 (one-time fee). A scalable tier covering full project lifecycles: bespoke design, rigorous development, technical SEO, and launch infrastructure. Projects are quoted based on technical complexity and scope.
+*   **Ongoing Maintenance & Infrastructure:** Starts at $5/month. Continuous care including server infrastructure, security patches, uptime monitoring, and technical support.
 
-## Target Audience
-Nuri partners with businesses that want a standout digital presence, ranging from local restaurants and cafes to boutique shops and e-commerce platforms. 
+## Project Scope & Target Audience
+Nuri partners with bold businesses, ambitious startups, and established enterprises globally. The studio is equipped to handle a vast array of project types, including but not limited to:
+- Complex SaaS Dashboards
+- Custom E-Commerce Platforms
+- Highly Interactive Educational Tools
+- Data-Rich Corporate Portals
+- Dynamic Portfolio and Retail Sites
 
-## Portfolio Highlights
-*   **Castaways Cafe:** A vibrant, full-featured website for a local cafe. Built with React and Vite. (Restaurant workflow)
-*   **Katie Cakes:** A warm, elegant website for a boutique cake studio. Built with HTML & CSS. (Bakery workflow)
-*   **Warren Cafe & Brunch:** A premium bilingual website for a Buenos Aires brunch café.
-*   **Margaliti Collection:** A premium bilingual website for Tbilisi's boutique Cheese Bar.
-*   **Mao Bubble Tea:** A super cute, fun, and funky website with playful animations for Tbilisi's premier bubble tea shop.
-*   **Hiragana.site / Katakana.site:** Interactive, progressive web apps (PWAs) with offline support for practicing Japanese character writing. Built with Firebase. (Educational tools)
-
-## Mission Statement
-"From local restaurants to growing businesses, we deliver bespoke web solutions with meticulous attention to detail, fast load times, and designs that convert visitors into customers."
+## Engineering Portfolio Highlights
+Nuri's portfolio demonstrates a wide breadth of technical capability across various stacks:
+*   **High-Performance SPA:** Engineered a vibrant, full-featured web application using React and Vite, optimizing for instantaneous state updates and rich media handling.
+*   **Offline-First PWAs:** Developed interactive educational platforms (Hiragana.site / Katakana.site) leveraging Firebase. These applications feature complex stroke-order drawing mechanics and robust local-first data synchronization, completely unreliant on continuous network connectivity.
+*   **Internationalized Platforms:** Built multiple premium, fully bilingual websites featuring complex routing, content management strategies, and dynamic architectural structures designed for global audiences.
+*   **Interactive UI/UX:** Designed and developed e-commerce style retail sites featuring custom CSS animations, complex layouts, and meticulously crafted brand identities.
 
 ## Contact Information
 *   **Website:** https://nurihq.github.io/
-*   **Form:** A secure contact form is available directly on the homepage for all project inquiries.
-*   **Project Types Handled:** New Websites, Website Redesigns, E-Commerce, Custom Web Apps.
+*   **Inquiries:** A secure project inquiry form is available directly on the homepage for scoping new builds, regardless of industry or technical requirement.
