@@ -621,12 +621,7 @@ body {
     /* Push content back in */
 }
 
-@media (max-width: 768px) {
-    .carousel-btn {
-        display: none;
-        /* Hide arrows on mobile where swipe is natural */
-    }
-}
+
 
 .portfolio-grid {
     display: flex;
