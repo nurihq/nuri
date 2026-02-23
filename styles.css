@@ -571,13 +571,75 @@ body {
 }
 
 /* ===== Portfolio ===== */
+.portfolio-carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.carousel-prev {
+    left: -24px;
+}
+
+.carousel-next {
+    right: -24px;
+}
+
+@media (max-width: 768px) {
+    .carousel-btn {
+        display: none;
+        /* Hide arrows on mobile where swipe is natural */
+    }
+}
+
 .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: flex;
     gap: 28px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 24px 0 40px;
+    /* Padding for hover shadows */
+    margin: -24px 0 -40px;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.portfolio-grid::-webkit-scrollbar {
+    display: none;
 }
 
 .portfolio-card {
+    flex: 0 0 calc((100% - (28px * 2)) / 3);
+    min-width: 300px;
+    scroll-snap-align: start;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -1113,8 +1175,8 @@ body {
 
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
-    .portfolio-grid {
-        grid-template-columns: 1fr 1fr;
+    .portfolio-card {
+        flex: 0 0 calc((100% - 28px) / 2);
     }
 
     .services-grid {
@@ -1141,8 +1203,8 @@ body {
         padding: 80px 0;
     }
 
-    .portfolio-grid {
-        grid-template-columns: 1fr;
+    .portfolio-card {
+        flex: 0 0 100%;
     }
 
     .services-grid {

@@ -152,3 +152,27 @@ window.addEventListener('mousemove', (e) => {
     if (orb1) orb1.style.transform = `translate(${x * 0.5}px, ${y * 0.5}px)`;
     if (orb2) orb2.style.transform = `translate(${-x * 0.3}px, ${-y * 0.3}px)`;
 }, { passive: true });
+
+// ===== Portfolio Carousel =====
+const portfolioGrid = document.getElementById('portfolioGrid');
+const portfolioPrev = document.getElementById('portfolioPrev');
+const portfolioNext = document.getElementById('portfolioNext');
+
+if (portfolioGrid && portfolioPrev && portfolioNext) {
+    const getScrollAmount = () => {
+        // Scroll by the width of one card plus its gap
+        const firstCard = portfolioGrid.querySelector('.portfolio-card');
+        if (!firstCard) return 300;
+        const style = window.getComputedStyle(portfolioGrid);
+        const gap = parseFloat(style.gap) || 28;
+        return firstCard.offsetWidth + gap;
+    };
+
+    portfolioPrev.addEventListener('click', () => {
+        portfolioGrid.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+
+    portfolioNext.addEventListener('click', () => {
+        portfolioGrid.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+}
