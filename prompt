@@ -5,25 +5,37 @@
 
 Phase 1:
 
+
+# Generic instructions
+
 I would like a new webapp in the websites folder
 1. Create the folder and the app and push to github using gh cli tool
-2. host it as a github pages site, and return the url of the site
-3. Use the url of the site and add to the nuri site portfolio section and push the nuri site
-4. Use the gcloud cli tool to push an account to the Nuri Property with the business name and use the new measurement ID to set up google analytics for the site.
+2. Use gh cli tool to host it as a github pages site, and return the url of the site
+3. Use the url of the site and add to the nuri site (nuri folder under websites) portfolio section and push the nuri repo to deploy the changes
+4. Use the gcloud cli tool to push an account to the Nuri Property with the business name and use the new measurement ID to set up google analytics for the new site.
 
-The site is for the business located below.
-https://www.instagram.com/collectionmargaliti
+Features:
+1. I want the landing to be unique and cool and tailored to the business
+2. I want the powered by nuri footer the same as the other apps
 
 
-Special features of this site:
+# Specific instructions
+
+The site is for the business below:
+
+
+1. Link to facebook, instagram, twitter, google maps, google maps reviews, tripadvisor if they exist
+
+## Georgia specific
 1. App should be in georgian by default, with a button to toggle between georgian and english (look at how it was done in the mao app)
-2. If they are listed on a local food delivery network, link to that
-3. Link to facebook and instagram and anything else
-4. I want the landing to be unique and cool and tailored to the business
-5. I want some menu items listed with real photos from their online presence, bonus if you can link to the items in their food delivery partner app.
-  5.1 Please make extra certain the images match the descriptions and the links are correct.
+2. Link to wolt if they are listed on it
 
-Please create a checklist and ensure you don't leave anything else
+## For restaurants
+1. Link to wolt if they are listed on it
+2. I want some menu items listed with real photos from their online presence, bonus if you can link to the items in their food delivery partner app.
+  2.1 Please make extra certain the images match the descriptions and the links are correct.
+
+Please create a checklist and ensure you don't leave anything out
 
 
 
@@ -58,3 +70,34 @@ If you like the look of it, I can have the full site live on your own domain by 
 Best regards,
 
 Andrew from Nuri [links to nuri.software]
+
+
+
+
+
+
+
+
+
+
+
+Can we please stop smoking in Sakartvelo
+Why are our youth damaging themselves like this
+Get to a fighting gym
+Find a passion
+What are your dreams
+The thing that hurts the most is seeing young women smoking
+If you need support please reach out
+I smoked for 13 years and quite 2 years ago
+It was not easy, so I sympathise
+But I am angry every day at how I wasted my life doing it
+Please stop
+Find a community
+Do what you love
+Connect
+Stop drinking and smoking
+You are unique
+The world needs you to fulfil your purpose
+I want a contact us page with a form that sends an email to leidenfrostconsulting@gmail.com
+
+Also give me a reddit post that links to this site that I can post on r/sakartvelo and r/tbilisi
