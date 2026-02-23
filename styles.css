@@ -581,7 +581,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 10;
+    z-index: 20;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 50%;
@@ -608,6 +608,17 @@ body {
 
 .carousel-next {
     right: -24px;
+}
+
+/* Ensure buttons are visible outside the container bounds if needed */
+.portfolio-carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0 -24px;
+    /* Pull out to allow buttons space */
+    padding: 0 24px;
+    /* Push content back in */
 }
 
 @media (max-width: 768px) {
