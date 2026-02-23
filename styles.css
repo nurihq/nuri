@@ -607,7 +607,7 @@ body {
 }
 
 .carousel-next {
-    right: -24px;
+    right: 0;
 }
 
 /* Ensure buttons are visible outside the container bounds if needed */
