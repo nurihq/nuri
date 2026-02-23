@@ -168,6 +168,28 @@ if (portfolioGrid && portfolioPrev && portfolioNext) {
         return firstCard.offsetWidth + gap;
     };
 
+    const updateArrowVisibility = () => {
+        const { scrollLeft, scrollWidth, clientWidth } = portfolioGrid;
+
+        // Hide prev arrow if at the very beginning
+        if (scrollLeft <= 5) { // 5px buffer
+            portfolioPrev.style.opacity = '0';
+            portfolioPrev.style.pointerEvents = 'none';
+        } else {
+            portfolioPrev.style.opacity = '1';
+            portfolioPrev.style.pointerEvents = 'auto';
+        }
+
+        // Hide next arrow if at the very end
+        if (scrollLeft + clientWidth >= scrollWidth - 5) {
+            portfolioNext.style.opacity = '0';
+            portfolioNext.style.pointerEvents = 'none';
+        } else {
+            portfolioNext.style.opacity = '1';
+            portfolioNext.style.pointerEvents = 'auto';
+        }
+    };
+
     portfolioPrev.addEventListener('click', () => {
         portfolioGrid.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
     });
@@ -175,4 +197,13 @@ if (portfolioGrid && portfolioPrev && portfolioNext) {
     portfolioNext.addEventListener('click', () => {
         portfolioGrid.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
     });
+
+    // Listen to scroll events to update arrows dynamically
+    portfolioGrid.addEventListener('scroll', updateArrowVisibility, { passive: true });
+
+    // Also update on window resize in case of layout changes
+    window.addEventListener('resize', updateArrowVisibility, { passive: true });
+
+    // Initial check
+    updateArrowVisibility();
 }
