@@ -101,7 +101,8 @@
                 <span class="logo-en">Nuri</span>
                 <span class="logo-jp">ぬり</span>
             </a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"
+                onclick="gtag('event', 'click', { 'event_category': 'Navigation', 'event_label': 'Mobile Menu Toggle' });">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="navLinks">
@@ -109,9 +110,12 @@
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+                <li><a href="#contact" class="nav-cta"
+                        onclick="gtag('event', 'click', { 'event_category': 'Navigation', 'event_label': 'Get in Touch' });">Get
+                        in Touch</a></li>
                 <li>
-                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"
+                        onclick="gtag('event', 'click', { 'event_category': 'Theme', 'event_label': 'Dark Mode Toggle' });">
                         <span class="theme-icon-light">☀</span>
                         <span class="theme-icon-dark">☾</span>
                     </button>
@@ -138,8 +142,12 @@
                 <p class="hero-sub reveal">Premium websites crafted for businesses that demand excellence — beautiful
                     design, flawless performance, and results that matter.</p>
                 <div class="hero-actions reveal">
-                    <a href="#portfolio" class="btn btn-primary">View Our Work</a>
-                    <a href="#contact" class="btn btn-ghost">Start a Project</a>
+                    <a href="#portfolio" class="btn btn-primary"
+                        onclick="gtag('event', 'click', { 'event_category': 'Hero', 'event_label': 'View Our Work' });">View
+                        Our Work</a>
+                    <a href="#contact" class="btn btn-ghost"
+                        onclick="gtag('event', 'click', { 'event_category': 'Hero', 'event_label': 'Start a Project' });">Start
+                        a Project</a>
                 </div>
             </div>
             <div class="hero-scroll-hint">
@@ -414,7 +422,9 @@
                             <div class="card-cta-icon">+</div>
                             <h3>Your Project Here</h3>
                             <p>Ready to build something exceptional? Let's talk.</p>
-                            <a href="#contact" class="btn btn-primary btn-sm">Get Started</a>
+                            <a href="#contact" class="btn btn-primary btn-sm"
+                                onclick="gtag('event', 'click', { 'event_category': 'Portfolio', 'event_label': 'Get Started CTA' });">Get
+                                Started</a>
                         </div>
                     </article>
 
@@ -516,7 +526,9 @@
 
                 <div class="pricing-cta reveal">
                     <p>Ready to get started? It's that simple.</p>
-                    <a href="#contact" class="btn btn-primary">Start Your Project</a>
+                    <a href="#contact" class="btn btn-primary"
+                        onclick="gtag('event', 'click', { 'event_category': 'Pricing', 'event_label': 'Start Your Project' });">Start
+                        Your Project</a>
                 </div>
             </div>
         </section>
@@ -562,7 +574,8 @@
                                 placeholder="Describe your project, goals, timeline..." required></textarea>
                         </div>
                         <input type="hidden" name="_subject" value="New project enquiry from Nuri website" />
-                        <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                        <button type="submit" class="btn btn-primary btn-full" id="submitBtn"
+                            onclick="gtag('event', 'click', { 'event_category': 'Contact', 'event_label': 'Submit Form' });">
                             <span class="btn-text">Send Message</span>
                             <span class="btn-icon">→</span>
                         </button>
