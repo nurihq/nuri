@@ -104,13 +104,7 @@ if (form) {
 
         const formAction = form.getAttribute('action');
 
-        // If Formspree ID not yet set, alert the user
-        if (formAction.includes('YOUR_FORM_ID')) {
-            alert('Please configure the Formspree Form ID in index.html to enable email sending without an email app.');
-            return;
-        }
-
-        // Formspree submission
+        // Mailer submission
         submitBtn.classList.add('loading');
         submitBtn.querySelector('.btn-text').textContent = 'Sending...';
 

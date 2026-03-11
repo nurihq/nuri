@@ -699,8 +699,8 @@
                                 about your vision.</p>
                         </div>
                     </div>
-                    <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/mgolzaln"
-                        method="POST">
+                    <form class="contact-form reveal" id="contactForm"
+                        action="https://5osdsd7re7htcmddembdmucjv40ikqlo.lambda-url.us-east-1.on.aws/" method="POST">
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" placeholder="Jane Smith" required />
@@ -724,6 +724,19 @@
                             <textarea id="message" name="message" rows="5"
                                 placeholder="Describe your project, goals, timeline..." required></textarea>
                         </div>
+
+                        <!-- HONEYPOT (Anti-Spam) -->
+                        <div style="display:none;" aria-hidden="true">
+                            <label for="website_url">Leave this field blank</label>
+                            <input type="text" name="website_url" id="website_url" tabindex="-1" autocomplete="off" />
+                        </div>
+
+                        <!-- Website Identifier -->
+                        <input type="hidden" name="domain" value="nuri.software" />
+
+                        <!-- Redirection after success -->
+                        <input type="hidden" name="_redirect" value="https://nuri.software/#success" />
+
                         <input type="hidden" name="_subject" value="New project enquiry from Nuri website" />
                         <button type="submit" class="btn btn-primary btn-full" id="submitBtn"
                             onclick="gtag('event', 'click', { 'event_category': 'Contact', 'event_label': 'Submit Form' });">
