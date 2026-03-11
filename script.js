@@ -97,43 +97,26 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const form = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
 const formSuccess = document.getElementById('formSuccess');
-
-if (form) {
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const formAction = form.getAttribute('action');
-
-        // Mailer submission
-        submitBtn.classList.add('loading');
-        submitBtn.querySelector('.btn-text').textContent = 'Sending...';
-
-        try {
-            const data = new URLSearchParams(new FormData(form));
-            const response = await fetch(formAction, {
-                method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            });
-
-            if (response.ok) {
-                form.reset();
-                formSuccess.classList.add('show');
-                submitBtn.querySelector('.btn-text').textContent = 'Message Sent!';
-                setTimeout(() => {
-                    formSuccess.classList.remove('show');
-                    submitBtn.querySelector('.btn-text').textContent = 'Send Message';
-                    submitBtn.classList.remove('loading');
-                }, 5000);
-            } else {
-                throw new Error('Form submission failed');
-            }
-        } catch (err) {
-            submitBtn.querySelector('.btn-text').textContent = 'Send Message';
-            submitBtn.classList.remove('loading');
-            alert('Something went wrong. Please email us directly at leidenfrostconsulting@gmail.com');
+// Check for success fragment in URL
+if (window.location.hash === '#success') {
+    if (formSuccess) {
+        formSuccess.classList.add('show');
+        if (submitBtn) {
+            submitBtn.querySelector('.btn-text').textContent = 'Message Sent!';
+            submitBtn.classList.add('success');
         }
-    });
+        // Remove hash without reload
+        history.replaceState(null, null, window.location.pathname + window.location.search);
+
+        // Hide after 5 seconds
+        setTimeout(() => {
+            formSuccess.classList.remove('show');
+            if (submitBtn) {
+                submitBtn.querySelector('.btn-text').textContent = 'Send Message';
+                submitBtn.classList.remove('success');
+            }
+        }, 8000);
+    }
 }
 
 // ===== Subtle parallax on hero orbs =====
