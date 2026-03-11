@@ -753,6 +753,22 @@
         </section>
     </main>
 
+    <!-- Success Modal -->
+    <div id="successModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="closeModal" class="close-btn" aria-label="Close">&times;</button>
+            <div style="font-size: 3rem; margin-bottom: 16px;">✨</div>
+            <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 8px;">Message Sent!</h3>
+            <p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.5;">
+                Thanks for reaching out! We'll be in touch with you shortly.
+            </p>
+            <button class="btn btn-primary" style="width: 100%;"
+                onclick="document.getElementById('successModal').classList.add('hidden')">
+                Continue
+            </button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -773,7 +789,7 @@
         </div>
     </footer>
 
-    <script src="nuri-core.js?v=2.0"></script>
+    <script src="nuri-core.js?v=2.1"></script>
 </body>
 
 </html>

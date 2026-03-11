@@ -99,24 +99,30 @@ const submitBtn = document.getElementById('submitBtn');
 const formSuccess = document.getElementById('formSuccess');
 // Check for success fragment in URL
 if (window.location.hash === '#success') {
-    if (formSuccess) {
-        formSuccess.classList.add('show');
-        if (submitBtn) {
-            submitBtn.querySelector('.btn-text').textContent = 'Message Sent!';
-            submitBtn.classList.add('success');
-        }
-        // Remove hash without reload
+    const modal = document.getElementById('successModal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        // Remove hash from URL to prevent popping up again on refresh
         history.replaceState(null, null, window.location.pathname + window.location.search);
-
-        // Hide after 5 seconds
-        setTimeout(() => {
-            formSuccess.classList.remove('show');
-            if (submitBtn) {
-                submitBtn.querySelector('.btn-text').textContent = 'Send Message';
-                submitBtn.classList.remove('success');
-            }
-        }, 8000);
     }
+}
+
+// Close modal logic
+const closeModalBtn = document.getElementById('closeModal');
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+        document.getElementById('successModal').classList.add('hidden');
+    });
+}
+
+// Close modal on outside click
+const modalOverlay = document.getElementById('successModal');
+if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            modalOverlay.classList.add('hidden');
+        }
+    });
 }
 
 // ===== Subtle parallax on hero orbs =====
