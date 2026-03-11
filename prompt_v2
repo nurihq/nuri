@@ -1,10 +1,13 @@
 # Specific instructions
 The site is for the business below:
 
-https://wolt.com/ka/geo/tbilisi/restaurant/los-amigos
-https://www.facebook.com/p/Los-Amigos-%E1%83%9A%E1%83%9D%E1%83%A1-%E1%83%90%E1%83%9B%E1%83%98%E1%83%92%E1%83%9D%E1%83%A1-100071138767337/
-https://www.instagram.com/losamigos.tbilisi/
+https://www.instagram.com/honeyboba_tbilisi
+https://www.facebook.com/p/honeyboba_tbilisi-100090943046845/
 
+Make a boba tea the favicon and built with by nuri.
+Make the attached image of a rabbit the animated hero image. Remove the background.
+
+Links section should link to to wolt bolt glovo instagram facebook
 
 
 # Generic instructions
@@ -21,8 +24,8 @@ Features:
     - Get the images and links from Wolt
     - Search for the store on wolt
     - Search for the item on the store
-    - Screenshot the popup image
-    - copy the link
+    - Screenshot the popup image (only screenshot the image)
+    - copy the link and to use in our website
 3. I want the next section to be links to their facebook, instagram and wolt if they exist, please don't improvise
 4. I want the next section to be a google maps embed.
 5. The awesome built with Nuri footer should be added, like in other apps
