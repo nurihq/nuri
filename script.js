@@ -109,7 +109,7 @@ if (form) {
         submitBtn.querySelector('.btn-text').textContent = 'Sending...';
 
         try {
-            const data = new FormData(form);
+            const data = new URLSearchParams(new FormData(form));
             const response = await fetch(formAction, {
                 method: 'POST',
                 body: data,
