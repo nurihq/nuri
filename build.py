@@ -15,10 +15,24 @@ def build():
     # Add OG image replacement for portfolio
     def set_portfolio_og(doc):
         # We replace the default og:image with one of the colorful portfolio images, e.g., honeyboba.png
-        return doc.replace(
+        doc = doc.replace(
             '<meta property="og:image" content="https://nuri.software/img/og-image.png" />',
-            '<meta property="og:image" content="https://nuri.software/img/portfolio/honeyboba.png" />'
+            '<meta property="og:image" content="https://nuri.software/img/portfolio/mao.png" />'
         )
+        # Update titles to show it's the portfolio
+        doc = doc.replace(
+            '<title>Nuri ぬり — Web Development</title>',
+            '<title>Portfolio | Nuri ぬり</title>'
+        )
+        doc = doc.replace(
+            '<meta property="og:title" content="Nuri ぬり — Web Development" />',
+            '<meta property="og:title" content="Portfolio | Nuri ぬり" />'
+        )
+        doc = doc.replace(
+            '<meta property="twitter:title" content="Nuri ぬり — Web Development" />',
+            '<meta property="twitter:title" content="Portfolio | Nuri ぬり" />'
+        )
+        return doc
 
     # Add auto-scroll to portfolio
     def set_portfolio_scroll(doc):
@@ -34,6 +48,7 @@ def build():
     # Ensure directories exist
     os.makedirs('en/portfolio', exist_ok=True)
     os.makedirs('ge/portfolio', exist_ok=True)
+    os.makedirs('es/portfolio', exist_ok=True)
 
     # Build /en/
     en_html = set_lang(html, 'en')
@@ -54,6 +69,16 @@ def build():
     ge_port = set_portfolio_scroll(set_portfolio_og(ge_html))
     with open('ge/portfolio/index.html', 'w', encoding='utf-8') as f:
         f.write(ge_port)
+
+    # Build /es/
+    es_html = set_lang(html, 'es')
+    with open('es/index.html', 'w', encoding='utf-8') as f:
+        f.write(es_html)
+
+    # Build /es/portfolio/
+    es_port = set_portfolio_scroll(set_portfolio_og(es_html))
+    with open('es/portfolio/index.html', 'w', encoding='utf-8') as f:
+        f.write(es_port)
 
     print("Successfully built static routing directories!")
 

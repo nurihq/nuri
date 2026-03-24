@@ -259,41 +259,124 @@ const nuriTranslations = {
         "Message Sent!": "შეტყობინება გაიგზავნა!",
         "Thanks for reaching out! We'll be in touch with you shortly.": "მადლობა დაკავშირებისთვის! მალე დაგიბრუნდებით.",
         "Continue": "გაგრძელება"
+    },
+    es: {
+        "Nuri ぬり": "Nuri ぬり",
+        "Web Development Studio": "Estudio de Desarrollo Web",
+        "We paint the web with purpose.": "Pintamos la web con propósito.",
+        "Premium websites crafted for businesses that demand excellence — beautiful design, flawless performance, and results that matter.": "Sitios web premium creados para empresas que exigen excelencia: un gran diseño, rendimiento impecable y resultados que importan.",
+        "View Our Work": "Ver Nuestro Trabajo",
+        "Start a Project": "Iniciar un Proyecto",
+        "About": "Sobre Nosotros",
+        "Portfolio": "Portafolio",
+        "Services": "Servicios",
+        "Pricing": "Precios",
+        "Get in Touch": "Contactar",
+        "Crafting digital experiences that leave a mark.": "Creando experiencias digitales que dejan huella.",
+        "From local restaurants to growing businesses, we deliver bespoke web solutions with meticulous attention to detail, fast load times, and designs that convert visitors into customers.": "Desde restaurantes locales hasta empresas en crecimiento, ofrecemos soluciones web a medida con una atención meticulosa a los detalles, tiempos de carga rápidos y diseños que convierten a los visitantes en clientes.",
+        "Custom Design": "Diseño a Medida",
+        "Performance First": "Rendimiento Ante Todo",
+        "Passion for Craft": "Pasión por el Arte",
+        "Sites we've brought to life.": "Sitios que hemos hecho realidad.",
+        "Each project is built from scratch — no templates, no shortcuts. Just clean code and thoughtful design.": "Cada proyecto se construye desde cero: sin plantillas, sin atajos. Solo código limpio y diseño bien pensado.",
+        "Your Project Here": "Tu Proyecto Aquí",
+        "Ready to build something exceptional? Let's talk.": "¿Listo para construir algo excepcional? Hablemos.",
+        "Get Started": "Comenzar",
+        "Everything you need to succeed online.": "Todo lo que necesitas para triunfar en internet.",
+        "Web Development": "Desarrollo Web",
+        "Responsive & Mobile": "Adaptable y Móvil",
+        "Hosting & Deployment": "Alojamiento y Despliegue",
+        "SEO Optimisation": "Optimización SEO",
+        "Ongoing Support": "Soporte Continuo",
+        "Bespoke visual identities and interfaces tailored to your brand — no templates, no compromises.": "Identidades visuales e interfaces a medida adaptadas a tu marca: sin plantillas, ni compromisos.",
+        "Clean, modern code built for speed, accessibility, and long-term maintainability.": "Código limpio y moderno, diseñado para ser rápido, accesible y fácil de mantener a largo plazo.",
+        "Pixel-perfect experiences across every device — from desktop to the smallest screen.": "Experiencias perfectas en todos los dispositivos, desde la computadora de escritorio hasta la pantalla más pequeña.",
+        "Fast, reliable hosting setup with continuous deployment — your site is always live and up to date.": "Configuración de alojamiento rápida y confiable con despliegue continuo: tu sitio web siempre en línea y actualizado.",
+        "Built-in best practices to help your business get found by the right people at the right time.": "Mejores prácticas integradas para ayudar a tu negocio a ser encontrado por las personas adecuadas en el momento adecuado.",
+        "Updates, improvements, and peace of mind — we're here long after launch day.": "Actualizaciones, mejoras y tranquilidad: estamos aquí mucho después del día del lanzamiento.",
+        "Simple, transparent investment.": "Inversión simple y transparente.",
+        "Professional web development shouldn't be complicated. We offer a clear path to getting online and staying there.": "El desarrollo web profesional no tiene por qué ser complicado. Te ofrecemos una perspectiva clara para estar en línea.",
+        "Design & Build": "Diseño y Desarrollo",
+        "/one-time": "/una vez",
+        "Custom Design & Development": "Diseño y Desarrollo a Medida",
+        "Responsive Mobile Layout": "Diseño Adaptable para Móviles",
+        "SEO Optimization": "Optimización SEO",
+        "Domain Configuration": "Configuración de Dominio",
+        "Launch Support": "Soporte de Lanzamiento",
+        "Care & Hosting": "Mantenimiento y Alojamiento",
+        "/month": "/mes",
+        "Secure Hosting": "Alojamiento Seguro",
+        "Monthly Content Updates": "Actualizaciones de Contenido Menusales",
+        "24/7 Uptime Monitoring": "Monitoreo de Disponibilidad 24/7",
+        "Technical Support": "Soporte Técnico",
+        "Peace of Mind": "Tranquilidad",
+        "Ready to get started? It's that simple.": "¿Listo para empezar? Es así de simple.",
+        "Start Your Project": "Inicia Tu Proyecto",
+        "Let's build something together.": "Construyamos algo juntos.",
+        "Have a project in mind? We'd love to hear about it. Fill in the form below and we'll get back to you within 24 hours.": "¿Tienes un proyecto en mente? Nos encantaría escucharlo. Completa el formulario y nos contactaremos dentro de 24 horas.",
+        "We respond to every enquiry personally. No bots, no templates — just a real conversation about your vision.": "Respondemos cada consulta de forma personal. Cero bots, cero plantillas — una verdadera conversación sobre tu visión.",
+        "Your Name": "Tu Nombre",
+        "Email Address": "Correo Electrónico",
+        "Project Type": "Tipo de Proyecto",
+        "New Website": "Nuevo Sitio Web",
+        "Website Redesign": "Rediseño de Sitio Web",
+        "E-Commerce": "Tienda en Línea",
+        "Other": "Otro",
+        "Select a service...": "Selecciona un servicio...",
+        "Tell Us About Your Project": "Cuéntanos Sobre Tu Proyecto",
+        "Send Message": "Enviar Mensaje",
+        "Message Sent!": "¡Mensaje Enviado!",
+        "Thanks for reaching out! We'll be in touch with you shortly.": "¡Gracias por contactarnos! Estaremos en comunicación en breve.",
+        "Continue": "Continuar"
     }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    const isGeorgian = window.siteLang === "ge" || window.location.pathname.startsWith('/ge');
-    const langToggle = document.getElementById("langToggle");
-    
-    if (langToggle) {
-        langToggle.textContent = isGeorgian ? "🇺🇸" : "🇬🇪";
+    let activeLang = 'en';
+    if (window.siteLang === 'ge' || window.location.pathname.startsWith('/ge')) activeLang = 'ge';
+    else if (window.siteLang === 'es' || window.location.pathname.startsWith('/es')) activeLang = 'es';
+
+    // Dropdown UI logic
+    const currentLangFlag = document.getElementById("currentLangFlag");
+    if (currentLangFlag) {
+        if (activeLang === 'ge') currentLangFlag.textContent = "🇬🇪";
+        else if (activeLang === 'es') currentLangFlag.textContent = "🇪🇸";
+        else currentLangFlag.textContent = "🇺🇸";
     }
 
-    if (isGeorgian) {
-        // Translation engine: traverses all text nodes and replaces them if a translation exists
+    // Close click-away for dropdown
+    document.addEventListener('click', (e) => {
+        const langDropdown = document.getElementById('langDropdownContainer');
+        const langMenu = document.getElementById('langMenu');
+        if (langDropdown && langMenu && !langDropdown.contains(e.target)) {
+            langMenu.style.display = 'none';
+        }
+    });
+
+    // Translation engine
+    if (activeLang !== 'en' && nuriTranslations[activeLang]) {
+        const translations = nuriTranslations[activeLang];
+
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
         let node;
-        while(node = walker.nextNode()) {
+        while (node = walker.nextNode()) {
             const originalText = node.nodeValue.trim();
-            if (originalText && nuriTranslations.ge[originalText]) {
-                node.nodeValue = node.nodeValue.replace(originalText, nuriTranslations.ge[originalText]);
+            if (originalText && translations[originalText]) {
+                node.nodeValue = node.nodeValue.replace(originalText, translations[originalText]);
             }
         }
-        
-        // Handle input placeholders specifically
+
         document.querySelectorAll('input, textarea').forEach(el => {
-            if (el.placeholder && nuriTranslations.ge[el.placeholder.trim()]) {
-                el.placeholder = nuriTranslations.ge[el.placeholder.trim()];
+            if (el.placeholder && translations[el.placeholder.trim()]) {
+                el.placeholder = translations[el.placeholder.trim()];
             }
         });
 
-        // Translate specific dynamic options if needed
         document.querySelectorAll('option').forEach(el => {
-             const text = el.textContent.trim();
-             if (nuriTranslations.ge[text]) {
-                 el.textContent = nuriTranslations.ge[text];
-             }
+            const text = el.textContent.trim();
+            if (translations[text]) {
+                el.textContent = translations[text];
+            }
         });
     }
 });

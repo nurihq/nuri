@@ -14,7 +14,7 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nuri ぬり — Web Development</title>
+    <title>Portfolio | Nuri ぬり</title>
     <meta name="description"
         content="Nuri ぬり is a premium web development studio crafting beautiful, high-performance websites for businesses that want to stand out." />
     <meta name="keywords"
@@ -24,15 +24,15 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://nuri.software/" />
-    <meta property="og:title" content="Nuri ぬり — Web Development" />
+    <meta property="og:title" content="Portfolio | Nuri ぬり" />
     <meta property="og:description"
         content="Nuri ぬり is a premium web development studio crafting beautiful, high-performance websites for businesses that want to stand out." />
-    <meta property="og:image" content="https://nuri.software/img/og-image.png" />
+    <meta property="og:image" content="https://nuri.software/img/portfolio/mao.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://nuri.software/" />
-    <meta property="twitter:title" content="Nuri ぬり — Web Development" />
+    <meta property="twitter:title" content="Portfolio | Nuri ぬり" />
     <meta property="twitter:description"
         content="Nuri ぬり is a premium web development studio crafting beautiful, high-performance websites for businesses that want to stand out." />
     <meta property="twitter:image" content="https://nuri.software/img/og-image.png" />
@@ -91,7 +91,7 @@
       ]
     }
     </script>
-    <script>window.siteLang = "ge";</script>
+    <script>window.siteLang = "es";</script>
 </head>
 
 <body>
@@ -821,6 +821,14 @@
     </footer>
 
     <script src="nuri-core.js?v=2.1"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+          var section = document.getElementById("portfolio");
+          if (section) section.scrollIntoView();
+        }, 100); 
+      });
+    </script>
 </body>
 
 </html>

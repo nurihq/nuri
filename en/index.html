@@ -115,12 +115,28 @@
                 <li><a href="#contact" class="nav-cta"
                         onclick="gtag('event', 'click', { 'event_category': 'Navigation', 'event_label': 'Get in Touch' });">Get
                         in Touch</a></li>
-                <li>
-                    <button id="langToggle" class="lang-btn" aria-label="Toggle Language"
-                        style="background:none; border:none; cursor:pointer; font-size:1.2rem; padding: 0.5rem;"
-                        onclick="window.location.href = (window.siteLang === 'ge' || window.location.pathname.startsWith('/ge')) ? '/en' : '/ge'; return false;">
-                        🇬🇪
+                <li style="position: relative;" id="langDropdownContainer">
+                    <button id="langToggle" class="lang-btn" aria-label="Select Language"
+                        style="background:none; border:none; cursor:pointer; font-size:1.2rem; padding: 0.5rem; display: flex; align-items: center; gap: 4px;"
+                        onclick="const m = document.getElementById('langMenu'); m.style.display = m.style.display === 'none' ? 'flex' : 'none';">
+                        <span id="currentLangFlag">🇺🇸</span>
+                        <span style="font-size: 0.7rem; color: var(--text-muted)">▼</span>
                     </button>
+                    <ul id="langMenu"
+                        style="display: none; position: absolute; top: 100%; right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem; list-style: none; margin: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); flex-direction: column; gap: 0.5rem; z-index: 100; min-width: 120px;">
+                        <li><a href="/en"
+                                style="text-decoration: none; display: block; padding: 0.4rem; color: var(--text); border-radius: 4px;"
+                                onmouseover="this.style.background='var(--primary-glow)'"
+                                onmouseout="this.style.background='transparent'">🇺🇸 English</a></li>
+                        <li><a href="/ge"
+                                style="text-decoration: none; display: block; padding: 0.4rem; color: var(--text); border-radius: 4px;"
+                                onmouseover="this.style.background='var(--primary-glow)'"
+                                onmouseout="this.style.background='transparent'">🇬🇪 ქართული</a></li>
+                        <li><a href="/es"
+                                style="text-decoration: none; display: block; padding: 0.4rem; color: var(--text); border-radius: 4px;"
+                                onmouseover="this.style.background='var(--primary-glow)'"
+                                onmouseout="this.style.background='transparent'">🇪🇸 Español</a></li>
+                    </ul>
                 </li>
                 <li>
                     <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"
