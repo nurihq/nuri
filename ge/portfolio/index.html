@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="/">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W6KYEJ23QR"></script>
     <script>
@@ -26,7 +27,7 @@
     <meta property="og:title" content="Nuri ぬり — Web Development" />
     <meta property="og:description"
         content="Nuri ぬり is a premium web development studio crafting beautiful, high-performance websites for businesses that want to stand out." />
-    <meta property="og:image" content="https://nuri.software/img/og-image.png" />
+    <meta property="og:image" content="https://nuri.software/img/portfolio/honeyboba.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -90,6 +91,7 @@
       ]
     }
     </script>
+    <script>window.siteLang = "ge";</script>
 </head>
 
 <body>
@@ -803,6 +805,14 @@
     </footer>
 
     <script src="nuri-core.js?v=2.1"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+          var section = document.getElementById("portfolio");
+          if (section) section.scrollIntoView();
+        }, 100); 
+      });
+    </script>
 </body>
 
 </html>
