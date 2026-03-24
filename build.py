@@ -45,6 +45,22 @@ def build():
                                       '      });\n'
                                       '    </script>\n</body>')
 
+    def create_failures_page(doc):
+        import re
+        comments_pattern = re.compile(r'<!--\s*(<a [^>]*class="[^"]*portfolio-card[^"]*"[^>]*>.*?</a>)\s*-->', re.DOTALL)
+        failed_cards = comments_pattern.findall(doc)
+        
+        parts = doc.split('<div class="portfolio-grid" id="portfolioGrid">')
+        if len(parts) > 1:
+            prefix = parts[0] + '<div class="portfolio-grid" id="portfolioGrid">'
+            subparts = parts[1].split('<button class="carousel-btn carousel-next"')
+            suffix = '<button class="carousel-btn carousel-next"' + subparts[1]
+            doc = prefix + '\n' + '\n'.join(failed_cards) + '\n                    </div>\n                    ' + suffix
+            
+        doc = doc.replace('<title>Nuri ぬり — Web Development</title>', '<title>Ghost Route</title>')
+        doc = doc.replace('Sites we\'ve brought to life.', 'Failed Ghost Route')
+        return doc
+
     # Ensure directories exist
     os.makedirs('en/portfolio', exist_ok=True)
     os.makedirs('ge/portfolio', exist_ok=True)
@@ -79,6 +95,12 @@ def build():
     es_port = set_portfolio_scroll(set_portfolio_og(es_html))
     with open('es/portfolio/index.html', 'w', encoding='utf-8') as f:
         f.write(es_port)
+
+    # Build /failures/
+    os.makedirs('failures', exist_ok=True)
+    failures_html = set_lang(create_failures_page(html), 'en')
+    with open('failures/index.html', 'w', encoding='utf-8') as f:
+        f.write(failures_html)
 
     print("Successfully built static routing directories!")
 
