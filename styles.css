@@ -223,9 +223,7 @@ body {
 }
 
 .nav.scrolled {
-    background: rgba(10, 10, 15, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 10, 15, 0.97);
     border-bottom: 1px solid var(--border);
     padding: 14px 0;
 }
