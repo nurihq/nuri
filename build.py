@@ -78,7 +78,6 @@ def build():
 
     # Build /ge/
     ge_html = set_lang(html, 'ge')
-    ge_html = ge_html.replace('$50<span class="period">/one-time</span>', '$0<span class="period">/one-time</span>')
     with open('ge/index.html', 'w', encoding='utf-8') as f:
         f.write(ge_html)
 
@@ -89,7 +88,6 @@ def build():
 
     # Build /es/
     es_html = set_lang(html, 'es')
-    es_html = es_html.replace('$50<span class="period">/one-time</span>', '$0<span class="period">/one-time</span>')
     with open('es/index.html', 'w', encoding='utf-8') as f:
         f.write(es_html)
 
