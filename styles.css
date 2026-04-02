@@ -219,6 +219,7 @@ body {
     z-index: 9999;
     padding: 20px 0;
     transition: var(--transition);
+    overflow: visible;
 }
 
 .nav.scrolled {
