@@ -832,7 +832,7 @@
 
 
     <!-- ══════════════════════════════════════════════════════
-         $1 WEBSITE CAMPAIGN — CHECKOUT MODAL FLOW
+         $1 WEBSITE CAMPAIGN — CHECKOUT MODAL (STEPPER FLOW)
          ══════════════════════════════════════════════════════ -->
     <div id="checkoutModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
         <div class="modal-content checkout-modal">
@@ -840,133 +840,123 @@
             <!-- Close button -->
             <button class="close-btn" id="closeCheckout" aria-label="Close checkout">&times;</button>
 
-            <!-- ── STEP 1: SIGN UP (Google OAuth) ── -->
-            <div id="checkoutStep0" class="flow-step">
-                <div class="checkout-badge">Limited Campaign</div>
-                <h3 id="checkoutTitle" class="modal-title">
-                    Claim Your <span class="accent-text">$1/mo</span> Website
-                </h3>
-                <p class="modal-subtitle">
-                    We're building 1,000 bespoke websites for $1/month.<br>
+            <!-- ── STEPPER HEADER ── -->
+            <div class="modal-stepper">
+                <div class="step-item active" id="step-dot-0">
+                    <span class="step-circle">1</span>
+                    <span class="step-text">Sign In</span>
+                </div>
+                <div class="step-line" id="step-line-0"></div>
+                <div class="step-item" id="step-dot-1">
+                    <span class="step-circle">2</span>
+                    <span class="step-text">Specs</span>
+                </div>
+                <div class="step-line" id="step-line-1"></div>
+                <div class="step-item" id="step-dot-2">
+                    <span class="step-circle">3</span>
+                    <span class="step-text">Checkout</span>
+                </div>
+            </div>
+
+            <!-- ════ STEP 1: SIGN IN ════ -->
+            <div id="checkoutStep0" class="modal-step-pane">
+                <h3 id="checkoutTitle" class="pane-title">Claim Your $1/mo Website</h3>
+                <p class="pane-desc">
+                    1,000 custom websites for $1/month.<br>
                     <span id="spotsModalCount" class="spots-highlight"></span>
                 </p>
 
-                <!-- Value propositions -->
-                <div class="offer-features">
-                    <div class="offer-feature-item">
-                        <span class="feat-icon">✨</span>
-                        <div class="feat-text">
-                            <strong>100% Custom Engineering</strong>
-                            <span>Zero templates. Built specifically for your business.</span>
+                <!-- When NOT signed in -->
+                <div id="auth-unauthenticated" class="auth-section">
+                    <div id="googleSignInBtn" class="google-auth-btn-wrap"></div>
+                    <p class="auth-hint">Sign in with Google to reserve your spot.</p>
+                </div>
+
+                <!-- When SIGNED IN -->
+                <div id="auth-authenticated" class="auth-section hidden">
+                    <div class="auth-card">
+                        <img id="co-user-avatar" src="" alt="Profile" class="auth-avatar" />
+                        <div class="auth-details">
+                            <div class="auth-name" id="co-user-name"></div>
+                            <div class="auth-email" id="co-user-email"></div>
                         </div>
+                        <button type="button" class="auth-signout-btn" onclick="googleSignOut()">Sign out</button>
                     </div>
-                    <div class="offer-feature-item">
-                        <span class="feat-icon">📊</span>
-                        <div class="feat-text">
-                            <strong>Hosting &amp; Google Analytics</strong>
-                            <span>Continuous fast hosting and traffic data included.</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Google Sign-In button -->
-                <div class="google-auth-wrapper">
-                    <div id="googleSignInBtn" class="google-btn-container"></div>
-                </div>
-
-                <div class="step-indicator">
-                    <span>Step 1 of 3: Reserve your spot</span>
-                </div>
-            </div>
-
-            <!-- ── STEP 2: COMPANY & WEBSITE SPECS ── -->
-            <div id="checkoutStep1" class="flow-step hidden">
-                <!-- User Profile Header -->
-                <div class="user-profile-badge">
-                    <img id="co-avatar" src="" alt="Google Profile" class="user-avatar" />
-                    <div class="user-info">
-                        <div class="user-name" id="co-welcome"></div>
-                        <div class="user-email" id="co-email-shown"></div>
-                    </div>
-                    <span class="verified-tag">✓ Signed In</span>
-                </div>
-
-                <h3 class="modal-title">Project Details</h3>
-                <p class="modal-subtitle">
-                    Tell us what you'd like us to build for you.
-                </p>
-
-                <form id="checkoutForm" onsubmit="checkoutStep1Submit(event)">
-                    <div class="form-group custom-input-group">
-                        <label for="co-business">Company / Business Name <span style="color:var(--accent)">*</span></label>
-                        <input type="text" id="co-business" name="business" placeholder="e.g. Acme Coffee Roasters" required />
-                    </div>
-
-                    <div class="form-group custom-input-group">
-                        <label for="co-description">Website Description &amp; Goals <span style="color:var(--accent)">*</span></label>
-                        <textarea id="co-description" name="description" rows="4"
-                            placeholder="Describe your website (e.g. key pages, target audience, preferred style, menu/booking integrations)..." required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-full" style="margin-top: 0.5rem;">
-                        <span>Proceed to Checkout</span>
+                    <button type="button" class="btn btn-primary btn-full" onclick="goToStep(1)" style="margin-top:14px;">
+                        <span>Continue to Project Specs</span>
                         <span class="btn-icon">→</span>
                     </button>
-                </form>
-
-                <div class="step-indicator">
-                    <span>Step 2 of 3: Website specifications</span>
                 </div>
             </div>
 
-            <!-- ── STEP 3: DEDICATED CHECKOUT (PayPal) ── -->
-            <div id="checkoutStep2" class="flow-step hidden">
-                <div class="checkout-badge">Final Step</div>
-                <h3 class="modal-title">Lock in your $1/mo subscription</h3>
-                <p class="modal-subtitle">
+            <!-- ════ STEP 2: PROJECT SPECS ════ -->
+            <div id="checkoutStep1" class="modal-step-pane hidden">
+                <h3 class="pane-title">Project Details</h3>
+                <p class="pane-desc">Tell us what you'd like us to build.</p>
+
+                <form id="checkoutForm" onsubmit="handleSpecsSubmit(event)">
+                    <div class="form-field">
+                        <label for="co-business">Company / Business Name</label>
+                        <input type="text" id="co-business" placeholder="e.g. Acme Coffee Roasters" required />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="co-description">Website Description &amp; Goals</label>
+                        <textarea id="co-description" rows="3"
+                            placeholder="Describe your website (pages, style, menu/booking integrations, goals)..." required></textarea>
+                    </div>
+
+                    <div class="pane-actions">
+                        <button type="button" class="btn btn-ghost btn-sm" onclick="goToStep(0)">← Back</button>
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <span>Proceed to Payment</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ════ STEP 3: CHECKOUT ════ -->
+            <div id="checkoutStep2" class="modal-step-pane hidden">
+                <h3 class="pane-title">Lock in Subscription</h3>
+                <p class="pane-desc">
                     Building for: <strong id="co-business-display" style="color:var(--text)"></strong>
                 </p>
 
-                <!-- Clean Order Summary -->
-                <div class="order-summary-box">
-                    <div class="summary-line">
-                        <span>Custom Website Design &amp; Build</span>
-                        <span class="free-badge">FREE ($0)</span>
+                <div class="pricing-summary">
+                    <div class="summary-row">
+                        <span>Custom Website Build</span>
+                        <span class="free-text">FREE ($0)</span>
                     </div>
-                    <div class="summary-line">
-                        <span>Managed Hosting &amp; Analytics</span>
-                        <span class="price-val">$1.00 / mo</span>
+                    <div class="summary-row">
+                        <span>Hosting, Analytics &amp; Support</span>
+                        <span>$1.00 / mo</span>
                     </div>
-                    <div class="summary-total">
+                    <div class="summary-row summary-total-row">
                         <span>Total Due Today</span>
-                        <span class="total-val">$1.00</span>
+                        <span class="total-text">$1.00</span>
                     </div>
                 </div>
 
-                <!-- PayPal Button Container -->
-                <div id="paypal-button-container-P-09F04539218525449NKLHRSA" class="paypal-wrapper"></div>
+                <div id="paypal-button-container-P-09F04539218525449NKLHRSA" style="margin-top:12px;"></div>
 
-                <p class="terms-note">
-                    🔒 Secure subscription via PayPal. Cancel anytime after your site is live.
-                </p>
-
-                <div class="step-indicator">
-                    <span>Step 3 of 3: Payment &amp; Activation</span>
+                <div class="pane-actions" style="margin-top:12px;">
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="goToStep(1)">← Back to Specs</button>
                 </div>
             </div>
 
-            <!-- ── STEP 4: SUCCESS CONFIRMATION ── -->
-            <div id="checkoutStep3" class="flow-step hidden">
-                <div class="success-icon">🎉</div>
-                <h3 class="modal-title">Your spot is secured!</h3>
-                <p class="modal-subtitle" style="margin-bottom:1.5rem;">
-                    We've registered your order for <strong id="co-business-success" style="color:var(--text);"></strong>.
-                    We will email <span id="co-email-display" class="highlight-email"></span> within 24 hours to collect your exact specs and get building!
+            <!-- ════ STEP 4: SUCCESS ════ -->
+            <div id="checkoutStep3" class="modal-step-pane hidden">
+                <div style="font-size:2.8rem; margin-bottom:8px;">🎉</div>
+                <h3 class="pane-title">You're in!</h3>
+                <p class="pane-desc" style="margin-bottom:14px;">
+                    We've registered the order for <strong id="co-business-success" style="color:var(--text);"></strong>.<br>
+                    We'll email <span id="co-email-display" style="color:var(--accent); font-weight:600;"></span> within 24 hours to begin building.
                 </p>
-                <div class="sub-id-pill">
+                <div class="sub-pill">
                     Subscription ID: <code id="co-sub-id"></code>
                 </div>
-                <button class="btn btn-primary btn-full" onclick="closeCheckoutModal()">Done</button>
+                <button type="button" class="btn btn-primary btn-full" onclick="closeCheckoutModal()">Done</button>
             </div>
 
         </div>
@@ -977,20 +967,19 @@
 
     <script src="nuri-core.js?v=2.1"></script>
 
-    <!-- ── Checkout + Spots + Google Sign-In Logic ───────────── -->
+    <!-- ── Checkout Stepper & Logic ───────────── -->
     <script>
-    // ── Config ────────────────────────────────────────────────────
     const GOOGLE_CLIENT_ID  = '719377736713-0onfq9i7m3i0nkbbmmb4719mjp0evpj6.apps.googleusercontent.com';
     const RECORD_ORDER_URL  = 'https://xmyaookeg5ymyqzzcnbwitpjxe0obuck.lambda-url.us-east-1.on.aws/';
     const GET_SPOTS_URL     = 'https://dtymktzy3jwwbkzfoppdgjgqnm0akrfi.lambda-url.us-east-1.on.aws/';
     const FALLBACK_SPOTS    = 947;
 
-    // ── State ─────────────────────────────────────────────────────
     let checkoutData  = {};
     let paypalLoaded  = false;
     let spotsLeft     = FALLBACK_SPOTS;
+    let currentStep   = 0;
 
-    // ── Fetch live spots on page load ─────────────────────────────
+    // ── Fetch live spots on load ──────────────────────────────────
     (async () => {
         try {
             const res = await fetch(GET_SPOTS_URL);
@@ -998,9 +987,31 @@
                 const data = await res.json();
                 spotsLeft = data.spotsLeft ?? FALLBACK_SPOTS;
             }
-        } catch (e) { /* silent fallback */ }
+        } catch (e) {}
         document.getElementById('spotsCount').textContent = spotsLeft;
     })();
+
+    // ── Stepper Navigation ────────────────────────────────────────
+    function goToStep(step) {
+        currentStep = step;
+        [0, 1, 2, 3].forEach(function(i) {
+            var pane = document.getElementById('checkoutStep' + i);
+            if (pane) pane.classList.toggle('hidden', i !== step);
+        });
+
+        // Update stepper UI dots (0, 1, 2)
+        [0, 1, 2].forEach(function(i) {
+            var dot = document.getElementById('step-dot-' + i);
+            if (dot) {
+                dot.classList.toggle('active', i === step);
+                dot.classList.toggle('completed', i < step);
+            }
+            var line = document.getElementById('step-line-' + i);
+            if (line) {
+                line.classList.toggle('active', i < step);
+            }
+        });
+    }
 
     // ── Open / Close modal ────────────────────────────────────────
     function openCheckout() {
@@ -1010,8 +1021,12 @@
             'Only ' + spotsLeft + ' of 1,000 spots remaining.';
         gtag('event', 'checkout_open', { event_category: 'Campaign' });
 
-        // Initialise Google Sign-In button
-        initGoogleGIS();
+        if (checkoutData.idToken) {
+            goToStep(1);
+        } else {
+            goToStep(0);
+            initGoogleGIS();
+        }
     }
 
     function closeCheckoutModal() {
@@ -1026,9 +1041,8 @@
 
     // ── Google Sign-In ────────────────────────────────────────────
     function initGoogleGIS() {
-        if (window.google && window.google.accounts) {
-            renderGoogleButton();
-        }
+        if (!window.google || !window.google.accounts) return;
+        renderGoogleButton();
     }
 
     function renderGoogleButton() {
@@ -1054,50 +1068,66 @@
                 );
             }
         } catch (e) {
-            console.error('Google GIS error:', e);
+            console.error('GIS render error:', e);
         }
     }
 
-    // GIS fires this after the user picks their Google account
     function onGoogleSignIn(response) {
-        // Decode the JWT payload (no need to verify sig client-side — Lambda does that)
-        const payload = JSON.parse(atob(response.credential.split('.')[1]));
-        checkoutData.idToken  = response.credential;
-        checkoutData.name     = payload.name  || '';
-        checkoutData.email    = payload.email || '';
-        checkoutData.picture  = payload.picture || '';
+        try {
+            var payload = JSON.parse(atob(response.credential.split('.')[1]));
+            checkoutData.idToken  = response.credential;
+            checkoutData.name     = payload.name  || '';
+            checkoutData.email    = payload.email || '';
+            checkoutData.picture  = payload.picture || '';
 
-        // Populate step 1 UI
-        var avatar = document.getElementById('co-avatar');
-        if (checkoutData.picture) {
-            avatar.src = checkoutData.picture;
-            avatar.style.display = 'block';
+            // Update user row
+            var avatar = document.getElementById('co-user-avatar');
+            if (checkoutData.picture) {
+                avatar.src = checkoutData.picture;
+                avatar.style.display = 'block';
+            } else {
+                avatar.style.display = 'none';
+            }
+            document.getElementById('co-user-name').textContent  = checkoutData.name;
+            document.getElementById('co-user-email').textContent = checkoutData.email;
+
+            document.getElementById('auth-unauthenticated').classList.add('hidden');
+            document.getElementById('auth-authenticated').classList.remove('hidden');
+
+            gtag('event', 'checkout_google_signin', { event_category: 'Campaign', event_label: checkoutData.email });
+
+            // Automatically advance to specs step
+            goToStep(1);
+        } catch (e) {
+            console.error('JWT decode error:', e);
         }
-        document.getElementById('co-welcome').textContent   = 'Welcome, ' + checkoutData.name.split(' ')[0] + '!';
-        document.getElementById('co-email-shown').textContent = checkoutData.email;
-        document.getElementById('co-name-display').textContent = checkoutData.name.split(' ')[0];
+    }
 
-        // Advance to step 1
-        document.getElementById('checkoutStep0').classList.add('hidden');
-        document.getElementById('checkoutStep1').classList.remove('hidden');
-
-        gtag('event', 'checkout_google_signin', { event_category: 'Campaign', event_label: checkoutData.email });
+    function googleSignOut() {
+        checkoutData = {};
+        if (window.google && window.google.accounts) {
+            google.accounts.id.disableAutoSelect();
+        }
+        document.getElementById('co-business').value = '';
+        document.getElementById('co-description').value = '';
+        document.getElementById('auth-authenticated').classList.add('hidden');
+        document.getElementById('auth-unauthenticated').classList.remove('hidden');
+        renderGoogleButton();
+        goToStep(0);
     }
 
     window.addEventListener('load', function() {
         initGoogleGIS();
     });
 
-    // ── Step 1: business name & website description ──────────────
-    function checkoutStep1Submit(e) {
+    // ── Step 2: Specs Submit ──────────────────────────────────────
+    function handleSpecsSubmit(e) {
         e.preventDefault();
         checkoutData.business = document.getElementById('co-business').value.trim();
         checkoutData.description = document.getElementById('co-description').value.trim();
         document.getElementById('co-business-display').textContent = checkoutData.business;
 
-        document.getElementById('checkoutStep1').classList.add('hidden');
-        document.getElementById('checkoutStep2').classList.remove('hidden');
-
+        goToStep(2);
         gtag('event', 'checkout_step2', { event_category: 'Campaign', event_label: checkoutData.email });
 
         if (!paypalLoaded) {
@@ -1112,7 +1142,7 @@
         }
     }
 
-    // ── Step 2: PayPal ────────────────────────────────────────────
+    // ── Step 3: PayPal Render ─────────────────────────────────────
     function renderPayPalButton() {
         var container = document.getElementById('paypal-button-container-P-09F04539218525449NKLHRSA');
         container.innerHTML = '';
@@ -1125,8 +1155,7 @@
             onApprove: async function(data) {
                 checkoutData.subscriptionId = data.subscriptionID;
 
-                document.getElementById('checkoutStep2').classList.add('hidden');
-                document.getElementById('checkoutStep3').classList.remove('hidden');
+                goToStep(3);
                 document.getElementById('co-email-display').textContent = checkoutData.email;
                 document.getElementById('co-business-success').textContent = checkoutData.business || 'your business';
                 document.getElementById('co-sub-id').textContent = data.subscriptionID;
@@ -1148,11 +1177,11 @@
                         body: JSON.stringify(checkoutData),
                     });
                 } catch (err) {
-                    console.warn('Order recording failed (non-critical):', err);
+                    console.warn('Order recording error:', err);
                 }
             },
-            onError:  function(err) { console.error('PayPal error:', err); },
-            onCancel: function()    { gtag('event', 'checkout_cancel', { event_category: 'Campaign' }); },
+            onError: function(err) { console.error('PayPal error:', err); },
+            onCancel: function() { gtag('event', 'checkout_cancel', { event_category: 'Campaign' }); },
         }).render('#paypal-button-container-P-09F04539218525449NKLHRSA');
     }
     </script>

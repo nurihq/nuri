@@ -1267,25 +1267,24 @@ body {
 }
 
 /* ===========================
-   Modal specifically for Contact Form
+   CAMPAIGN — Clean Stepper Modal Flow
    =========================== */
+
 .modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(10, 10, 12, 0.85);
-    backdrop-filter: blur(8px);
-    z-index: 2000;
+    inset: 0;
+    background: rgba(4, 4, 8, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 100000;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease;
 }
 
 .modal-overlay.hidden {
@@ -1293,53 +1292,350 @@ body {
 }
 
 .modal-content {
-    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: #12121b;
+    border: 1px solid #232336;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
+    max-width: 440px;
+    width: 100%;
     padding: 32px 24px;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
     text-align: center;
-    max-width: 400px;
-    width: 90%;
     position: relative;
-    color: var(--text-main);
+    color: #f1f0f5;
+    margin: auto;
+}
+
+.modal-content.checkout-modal {
+    max-width: 480px;
+    padding: 28px 24px;
+    border: 1px solid #232336;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(139, 92, 246, 0.15);
 }
 
 .modal-content .close-btn {
     position: absolute;
-    top: 12px;
+    top: 14px;
     right: 16px;
     background: none;
     border: none;
-    color: var(--text-muted);
+    color: #64748b;
     font-size: 24px;
     cursor: pointer;
     line-height: 1;
-    transition: color 0.3s;
+    transition: color 0.2s;
+    padding: 4px;
 }
 
 .modal-content .close-btn:hover {
-    color: var(--primary);
+    color: #f8fafc;
 }
 
-@keyframes modalPop {
-    0% {
-        transform: scale(0.8) translateY(20px);
-        opacity: 0;
-    }
-
-    100% {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-    }
+/* Stepper Bar */
+.modal-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #1f1f2e;
 }
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #64748b;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.step-circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #1e1e2d;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.step-item.active {
+    color: #f8fafc;
+}
+
+.step-item.active .step-circle {
+    background: #8b5cf6;
+    border-color: #a78bfa;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.step-item.completed {
+    color: #a78bfa;
+}
+
+.step-item.completed .step-circle {
+    background: #2e1065;
+    border-color: #8b5cf6;
+    color: #c4b5fd;
+}
+
+.step-line {
+    width: 28px;
+    height: 1px;
+    background: #2d2d42;
+    margin: 0 8px;
+    transition: background 0.2s;
+}
+
+.step-line.active {
+    background: #8b5cf6;
+}
+
+/* Pane Typography */
+.modal-step-pane {
+    animation: stepFade 0.25s ease-out;
+}
+
+@keyframes stepFade {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.pane-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #ffffff !important;
+    margin: 0 0 6px 0;
+    line-height: 1.25;
+}
+
+.pane-desc {
+    color: #94a3b8 !important;
+    font-size: 0.88rem;
+    margin: 0 0 18px 0;
+    line-height: 1.45;
+}
+
+.spots-highlight {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+/* Auth Section */
+.auth-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+    margin: 12px 0 6px 0;
+}
+
+.google-auth-btn-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.auth-hint {
+    font-size: 0.78rem;
+    color: #64748b;
+    margin: 8px 0 0 0;
+}
+
+.auth-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #181826;
+    border: 1px solid #2d2d42;
+    border-radius: 12px;
+    padding: 10px 14px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.auth-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid #8b5cf6;
+}
+
+.auth-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.auth-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.auth-email {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.auth-signout-btn {
+    background: transparent;
+    border: 1px solid #334155;
+    color: #cbd5e1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.auth-signout-btn:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+    color: #f87171;
+}
+
+/* Form Fields */
+.form-field {
+    text-align: left;
+    margin-bottom: 14px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 6px;
+}
+
+.form-field input,
+.form-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    background: #181826;
+    border: 1px solid #2d2d42;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+    line-height: 1.4;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    border-color: #8b5cf6;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.25);
+}
+
+.pane-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-ghost:hover {
+    color: #ffffff;
+    border-color: #64748b;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-sm {
+    padding: 9px 16px;
+    font-size: 0.88rem;
+}
+
+/* Pricing Summary */
+.pricing-summary {
+    background: #181826;
+    border: 1px solid #28283c;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    text-align: left;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    padding: 3px 0;
+}
+
+.free-text {
+    color: #10b981;
+    font-weight: 700;
+}
+
+.summary-total-row {
+    border-top: 1px solid #28283c;
+    margin-top: 6px;
+    padding-top: 8px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.total-text {
+    color: #f59e0b;
+    font-size: 1.15rem;
+}
+
+.sub-pill {
+    background: #181826;
+    border: 1px solid #28283c;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+
+.sub-pill code {
+    color: #a78bfa;
+}
+
 /* ===========================
-   CAMPAIGN — Spots Badge
+   CAMPAIGN — Nav Spots Badge
    =========================== */
 
 .spots-badge {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
     background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(139, 92, 246, 0.15));
@@ -1371,321 +1667,4 @@ body {
 @keyframes spots-pulse {
     0%, 100% { transform: scale(1); }
     50%       { transform: scale(1.25); }
-}
-
-/* ===========================
-   CAMPAIGN — Premium Modal Flow
-   =========================== */
-
-.checkout-modal {
-    max-width: 520px;
-    width: 94vw;
-    max-height: calc(100vh - 60px);
-    overflow-y: auto;
-    box-sizing: border-box;
-    text-align: center;
-    padding: 2.5rem 2.25rem;
-    margin: auto;
-    background: #111119;
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: 24px;
-    box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.9), 0 0 50px -15px rgba(139, 92, 246, 0.25);
-}
-
-.flow-step {
-    animation: fadeInStep 0.3s ease-out;
-}
-
-@keyframes fadeInStep {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-.checkout-badge {
-    display: inline-flex;
-    align-items: center;
-    background: linear-gradient(135deg, var(--accent), #ec4899);
-    color: #fff;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 100px;
-    margin-bottom: 0.85rem;
-}
-
-.modal-title {
-    font-size: 1.55rem;
-    font-weight: 800;
-    color: var(--text);
-    margin: 0 0 0.4rem 0;
-    letter-spacing: -0.02em;
-    line-height: 1.25;
-}
-
-.modal-title .accent-text {
-    background: linear-gradient(135deg, var(--gold), #fbbf24);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.modal-subtitle {
-    color: var(--text-muted);
-    font-size: 0.92rem;
-    margin: 0 0 1.5rem 0;
-    line-height: 1.5;
-}
-
-.spots-highlight {
-    color: var(--gold);
-    font-weight: 600;
-}
-
-/* Value propositions on Step 1 */
-.offer-features {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.75rem;
-    text-align: left;
-}
-
-.offer-feature-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 14px;
-    padding: 12px 14px;
-}
-
-.offer-feature-item .feat-icon {
-    font-size: 1.25rem;
-    line-height: 1;
-    margin-top: 2px;
-}
-
-.offer-feature-item .feat-text strong {
-    display: block;
-    font-size: 0.9rem;
-    color: var(--text);
-    margin-bottom: 2px;
-}
-
-.offer-feature-item .feat-text span {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    line-height: 1.35;
-}
-
-/* Google Auth Wrapper */
-.google-auth-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 48px;
-    margin-bottom: 1.25rem;
-}
-
-.google-btn-container {
-    display: flex;
-    justify-content: center;
-}
-
-/* Step indicator */
-.step-indicator {
-    margin-top: 1.25rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
-
-/* User Profile Badge in Step 2 */
-.user-profile-badge {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(139, 92, 246, 0.08);
-    border: 1px solid rgba(139, 92, 246, 0.25);
-    border-radius: 14px;
-    padding: 10px 14px;
-    margin-bottom: 1.5rem;
-    text-align: left;
-}
-
-.user-avatar {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-    object-fit: cover;
-}
-
-.user-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.user-name {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.user-email {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.verified-tag {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: #10b981;
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    padding: 3px 8px;
-    border-radius: 100px;
-    white-space: nowrap;
-}
-
-.custom-input-group {
-    text-align: left;
-    margin-bottom: 1.5rem;
-}
-
-.custom-input-group label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-}
-
-.custom-input-group input,
-.custom-input-group textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 12px 14px;
-    background: var(--bg-2);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
-    color: var(--text);
-    font-size: 0.95rem;
-    font-family: var(--font);
-    transition: var(--transition);
-    resize: vertical;
-    line-height: 1.45;
-}
-
-.custom-input-group input:focus,
-.custom-input-group textarea:focus {
-    border-color: var(--accent);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
-}
-
-/* Dedicated Order Summary in Step 3 */
-.order-summary-box {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 1.25rem 1.4rem;
-    margin-bottom: 1.5rem;
-    text-align: left;
-}
-
-.summary-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    padding: 0.4rem 0;
-}
-
-.free-badge {
-    color: #10b981;
-    font-weight: 700;
-    font-size: 0.85rem;
-}
-
-.price-val {
-    color: var(--text);
-    font-weight: 600;
-}
-
-.summary-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 0.6rem;
-    padding-top: 0.75rem;
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: var(--text);
-}
-
-.total-val {
-    color: var(--gold);
-    font-size: 1.2rem;
-}
-
-.paypal-wrapper {
-    margin-top: 1rem;
-    min-height: 50px;
-}
-
-.terms-note {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    margin-top: 1rem;
-    line-height: 1.4;
-}
-
-/* Success screen */
-.success-icon {
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.highlight-email {
-    color: var(--accent);
-    font-weight: 600;
-}
-
-.sub-id-pill {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 8px 14px;
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    margin-bottom: 1.5rem;
-    display: inline-block;
-}
-
-.sub-id-pill code {
-    color: var(--accent-2);
-    font-weight: 600;
-}
-
-.btn-full {
-    width: 100%;
-    justify-content: center;
-    padding: 12px 20px;
-    font-size: 0.95rem;
-    font-weight: 600;
 }
