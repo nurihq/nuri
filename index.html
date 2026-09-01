@@ -832,119 +832,140 @@
 
 
     <!-- ══════════════════════════════════════════════════════
-         $1 WEBSITE CAMPAIGN — CHECKOUT MODAL
+         $1 WEBSITE CAMPAIGN — CHECKOUT MODAL FLOW
          ══════════════════════════════════════════════════════ -->
     <div id="checkoutModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
         <div class="modal-content checkout-modal">
 
-            <!-- Close -->
+            <!-- Close button -->
             <button class="close-btn" id="closeCheckout" aria-label="Close checkout">&times;</button>
 
-            <!-- ── Step 0: Google Sign-In ── -->
-            <div id="checkoutStep0">
-                <div class="checkout-badge">Limited Offer</div>
-                <div style="font-size:2.2rem; margin-bottom:0.25rem;">🌐</div>
-                <h3 id="checkoutTitle" style="font-size:1.4rem; font-weight:700; margin-bottom:0.25rem;">
-                    Claim Your <span style="color:var(--accent);">$1/mo</span> Website
+            <!-- ── STEP 1: SIGN UP (Google OAuth) ── -->
+            <div id="checkoutStep0" class="flow-step">
+                <div class="checkout-badge">Limited Campaign</div>
+                <h3 id="checkoutTitle" class="modal-title">
+                    Claim Your <span class="accent-text">$1/mo</span> Website
                 </h3>
-                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem; line-height:1.4;">
-                    We're building 1,000 custom websites for just $1/month.<br>
-                    <span id="spotsModalCount" style="color:var(--gold); font-weight:600;"></span>
-                </p>
-                <p style="color:var(--text); font-size:0.85rem; font-weight:500; margin-bottom:1rem;">
-                    Sign in with Google to claim your spot:
+                <p class="modal-subtitle">
+                    We're building 1,000 bespoke websites for $1/month.<br>
+                    <span id="spotsModalCount" class="spots-highlight"></span>
                 </p>
 
-                <!-- Declarative Google Identity Services container -->
-                <div id="g_id_onload"
-                     data-client_id="719377736713-0onfq9i7m3i0nkbbmmb4719mjp0evpj6.apps.googleusercontent.com"
-                     data-callback="onGoogleSignIn"
-                     data-auto_prompt="false">
-                </div>
-                <div style="display:flex; justify-content:center; min-height:44px; margin-bottom:1rem;">
-                    <div class="g_id_signin"
-                         data-type="standard"
-                         data-shape="rectangular"
-                         data-theme="outline"
-                         data-text="continue_with"
-                         data-size="large"
-                         data-logo_alignment="left"
-                         data-width="280">
+                <!-- Value propositions -->
+                <div class="offer-features">
+                    <div class="offer-feature-item">
+                        <span class="feat-icon">✨</span>
+                        <div class="feat-text">
+                            <strong>100% Custom Engineering</strong>
+                            <span>Zero templates. Built specifically for your business.</span>
+                        </div>
+                    </div>
+                    <div class="offer-feature-item">
+                        <span class="feat-icon">📊</span>
+                        <div class="feat-text">
+                            <strong>Hosting &amp; Google Analytics</strong>
+                            <span>Continuous fast hosting and traffic data included.</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Fallback programmatic container -->
-                <div id="googleSignInBtn" style="display:flex; justify-content:center;"></div>
+                <!-- Single Google Sign-In button -->
+                <div class="google-auth-wrapper">
+                    <div id="googleSignInBtn" class="google-btn-container"></div>
+                </div>
 
-                <p style="font-size:0.75rem; color:var(--text-dim); margin-top:0.75rem; line-height:1.4;">
-                    🔒 Instant signup with your Google account. No passwords or long forms.
-                </p>
+                <div class="step-indicator">
+                    <span>Step 1 of 3: Reserve your spot</span>
+                </div>
             </div>
 
-            <!-- ── Step 1: Business name (pre-filled from Google) ── -->
-            <div id="checkoutStep1" class="hidden">
-                <div style="display:flex; align-items:center; gap:12px; margin-bottom:1rem; justify-content:center;">
-                    <img id="co-avatar" src="" alt="" width="44" height="44"
-                        style="border-radius:50%; border:2px solid var(--accent); display:none;" />
-                    <div style="text-align:left;">
-                        <div style="font-weight:700; font-size:1rem;" id="co-welcome"></div>
-                        <div style="font-size:0.8rem; color:var(--text-muted);" id="co-email-shown"></div>
+            <!-- ── STEP 2: COMPANY & WEBSITE SPECS ── -->
+            <div id="checkoutStep1" class="flow-step hidden">
+                <!-- User Profile Header -->
+                <div class="user-profile-badge">
+                    <img id="co-avatar" src="" alt="Google Profile" class="user-avatar" />
+                    <div class="user-info">
+                        <div class="user-name" id="co-welcome"></div>
+                        <div class="user-email" id="co-email-shown"></div>
                     </div>
+                    <span class="verified-tag">✓ Signed In</span>
                 </div>
-                <h3 style="font-size:1.3rem; font-weight:700; margin-bottom:0.5rem;">One last thing</h3>
-                <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.25rem; line-height:1.5;">
-                    What's your business name? We'll use it when we reach out about your build.
+
+                <h3 class="modal-title">Project Details</h3>
+                <p class="modal-subtitle">
+                    Tell us what you'd like us to build for you.
                 </p>
+
                 <form id="checkoutForm" onsubmit="checkoutStep1Submit(event)">
-                    <div class="form-group" style="margin-bottom:1.5rem;">
-                        <label for="co-business">Business Name <span style="color:var(--text-dim); font-weight:400;">(optional)</span></label>
-                        <input type="text" id="co-business" name="business" placeholder="Acme Co." />
+                    <div class="form-group custom-input-group">
+                        <label for="co-business">Company / Business Name <span style="color:var(--accent)">*</span></label>
+                        <input type="text" id="co-business" name="business" placeholder="e.g. Acme Coffee Roasters" required />
                     </div>
-                    <button type="submit" class="btn btn-primary btn-full">
-                        <span>Continue to Payment</span>
+
+                    <div class="form-group custom-input-group">
+                        <label for="co-description">Website Description &amp; Goals <span style="color:var(--accent)">*</span></label>
+                        <textarea id="co-description" name="description" rows="4"
+                            placeholder="Describe your website (e.g. key pages, target audience, preferred style, menu/booking integrations)..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full" style="margin-top: 0.5rem;">
+                        <span>Proceed to Checkout</span>
                         <span class="btn-icon">→</span>
                     </button>
                 </form>
-                <p style="font-size:0.75rem; color:var(--text-dim); margin-top:1rem; line-height:1.4;">
-                    Secure payment via PayPal. Cancel anytime after your site is live.
-                </p>
+
+                <div class="step-indicator">
+                    <span>Step 2 of 3: Website specifications</span>
+                </div>
             </div>
 
-            <!-- ── Step 2: PayPal payment ── -->
-            <div id="checkoutStep2" class="hidden">
-                <div style="font-size:2.5rem; margin-bottom:0.5rem;">✅</div>
-                <h3 style="font-size:1.4rem; font-weight:700; margin-bottom:0.25rem;">
-                    One more step, <span id="co-name-display" style="color:var(--accent);"></span>!
-                </h3>
-                <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.5rem; line-height:1.5;">
-                    Subscribe for just <strong style="color:var(--gold);">$1/month</strong> to lock in your spot.<br>
-                    We'll email you within 24h to collect your website brief.
+            <!-- ── STEP 3: DEDICATED CHECKOUT (PayPal) ── -->
+            <div id="checkoutStep2" class="flow-step hidden">
+                <div class="checkout-badge">Final Step</div>
+                <h3 class="modal-title">Lock in your $1/mo subscription</h3>
+                <p class="modal-subtitle">
+                    Building for: <strong id="co-business-display" style="color:var(--text)"></strong>
                 </p>
 
-                <div class="checkout-plan-summary">
-                    <div class="plan-row"><span>Custom website build</span><span class="plan-price">Free</span></div>
-                    <div class="plan-row"><span>Hosting &amp; support</span><span class="plan-price">$1/mo</span></div>
-                    <div class="plan-row plan-total"><span>Today</span><span class="plan-price" style="color:var(--accent);">$1</span></div>
+                <!-- Clean Order Summary -->
+                <div class="order-summary-box">
+                    <div class="summary-line">
+                        <span>Custom Website Design &amp; Build</span>
+                        <span class="free-badge">FREE ($0)</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Managed Hosting &amp; Analytics</span>
+                        <span class="price-val">$1.00 / mo</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Total Due Today</span>
+                        <span class="total-val">$1.00</span>
+                    </div>
                 </div>
 
-                <div id="paypal-button-container-P-09F04539218525449NKLHRSA" style="margin-top:1rem;"></div>
+                <!-- PayPal Button Container -->
+                <div id="paypal-button-container-P-09F04539218525449NKLHRSA" class="paypal-wrapper"></div>
 
-                <p style="font-size:0.75rem; color:var(--text-dim); margin-top:1rem; line-height:1.4;">
-                    Powered by PayPal. Cancel anytime after your site is delivered.
+                <p class="terms-note">
+                    🔒 Secure subscription via PayPal. Cancel anytime after your site is live.
                 </p>
+
+                <div class="step-indicator">
+                    <span>Step 3 of 3: Payment &amp; Activation</span>
+                </div>
             </div>
 
-            <!-- ── Step 3: Success ── -->
-            <div id="checkoutStep3" class="hidden">
-                <div style="font-size:3rem; margin-bottom:0.5rem;">🎉</div>
-                <h3 style="font-size:1.5rem; font-weight:700; margin-bottom:0.5rem;">You're in!</h3>
-                <p style="color:var(--text-muted); line-height:1.6; margin-bottom:0.75rem;">
-                    Your spot is secured. We'll email <span id="co-email-display" style="color:var(--accent);font-weight:600;"></span>
-                    within 24 hours to collect your website brief and get building.
+            <!-- ── STEP 4: SUCCESS CONFIRMATION ── -->
+            <div id="checkoutStep3" class="flow-step hidden">
+                <div class="success-icon">🎉</div>
+                <h3 class="modal-title">Your spot is secured!</h3>
+                <p class="modal-subtitle" style="margin-bottom:1.5rem;">
+                    We've registered your order for <strong id="co-business-success" style="color:var(--text);"></strong>.
+                    We will email <span id="co-email-display" class="highlight-email"></span> within 24 hours to collect your exact specs and get building!
                 </p>
-                <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1.5rem;">
-                    Subscription ID: <code id="co-sub-id" style="color:var(--accent-2);"></code>
-                </p>
+                <div class="sub-id-pill">
+                    Subscription ID: <code id="co-sub-id"></code>
+                </div>
                 <button class="btn btn-primary btn-full" onclick="closeCheckoutModal()">Done</button>
             </div>
 
@@ -1067,10 +1088,12 @@
         initGoogleGIS();
     });
 
-    // ── Step 1: business name only ────────────────────────────────
+    // ── Step 1: business name & website description ──────────────
     function checkoutStep1Submit(e) {
         e.preventDefault();
         checkoutData.business = document.getElementById('co-business').value.trim();
+        checkoutData.description = document.getElementById('co-description').value.trim();
+        document.getElementById('co-business-display').textContent = checkoutData.business;
 
         document.getElementById('checkoutStep1').classList.add('hidden');
         document.getElementById('checkoutStep2').classList.remove('hidden');
@@ -1105,6 +1128,7 @@
                 document.getElementById('checkoutStep2').classList.add('hidden');
                 document.getElementById('checkoutStep3').classList.remove('hidden');
                 document.getElementById('co-email-display').textContent = checkoutData.email;
+                document.getElementById('co-business-success').textContent = checkoutData.business || 'your business';
                 document.getElementById('co-sub-id').textContent = data.subscriptionID;
 
                 spotsLeft = Math.max(0, spotsLeft - 1);

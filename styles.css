@@ -1374,85 +1374,318 @@ body {
 }
 
 /* ===========================
-   CAMPAIGN — Checkout Modal
+   CAMPAIGN — Premium Modal Flow
    =========================== */
 
 .checkout-modal {
-    max-width: 440px;
-    width: 100%;
-    max-height: calc(100vh - 40px);
+    max-width: 520px;
+    width: 94vw;
+    max-height: calc(100vh - 60px);
     overflow-y: auto;
     box-sizing: border-box;
     text-align: center;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 2.25rem;
     margin: auto;
+    background: #111119;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 24px;
+    box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.9), 0 0 50px -15px rgba(139, 92, 246, 0.25);
+}
+
+.flow-step {
+    animation: fadeInStep 0.3s ease-out;
+}
+
+@keyframes fadeInStep {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .checkout-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background: linear-gradient(135deg, var(--accent), #ec4899);
     color: #fff;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 4px 12px;
+    padding: 5px 14px;
     border-radius: 100px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
-/* Plan summary box */
-.checkout-plan-summary {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 1rem;
-    margin-top: 1rem;
+.modal-title {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0 0 0.4rem 0;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+}
+
+.modal-title .accent-text {
+    background: linear-gradient(135deg, var(--gold), #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.modal-subtitle {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.5;
+}
+
+.spots-highlight {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+/* Value propositions on Step 1 */
+.offer-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
     text-align: left;
 }
 
-.plan-row {
+.offer-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 12px 14px;
+}
+
+.offer-feature-item .feat-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+.offer-feature-item .feat-text strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 2px;
+}
+
+.offer-feature-item .feat-text span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.35;
+}
+
+/* Google Auth Wrapper */
+.google-auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+    margin-bottom: 1.25rem;
+}
+
+.google-btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+/* Step indicator */
+.step-indicator {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* User Profile Badge in Step 2 */
+.user-profile-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(139, 92, 246, 0.08);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: 14px;
+    padding: 10px 14px;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+}
+
+.user-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.user-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-email {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.verified-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 3px 8px;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+.custom-input-group {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.custom-input-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+
+.custom-input-group input,
+.custom-input-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    background: var(--bg-2);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-family: var(--font);
+    transition: var(--transition);
+    resize: vertical;
+    line-height: 1.45;
+}
+
+.custom-input-group input:focus,
+.custom-input-group textarea:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+/* Dedicated Order Summary in Step 3 */
+.order-summary-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.25rem 1.4rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.summary-line {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: var(--text-muted);
-    padding: 0.3rem 0;
+    padding: 0.4rem 0;
 }
 
-.plan-row + .plan-row {
-    border-top: 1px solid var(--border);
-}
-
-.plan-total {
+.free-badge {
+    color: #10b981;
     font-weight: 700;
-    color: var(--text) !important;
-    margin-top: 0.25rem;
-    padding-top: 0.5rem;
+    font-size: 0.85rem;
 }
 
-.plan-price {
+.price-val {
+    color: var(--text);
     font-weight: 600;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 0.6rem;
+    padding-top: 0.75rem;
+    font-weight: 700;
+    font-size: 1.05rem;
     color: var(--text);
 }
 
-/* Form inside checkout modal */
-.checkout-modal .form-group label {
-    text-align: left;
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 500;
-    margin-bottom: 0.4rem;
+.total-val {
+    color: var(--gold);
+    font-size: 1.2rem;
+}
+
+.paypal-wrapper {
+    margin-top: 1rem;
+    min-height: 50px;
+}
+
+.terms-note {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 1rem;
+    line-height: 1.4;
+}
+
+/* Success screen */
+.success-icon {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.highlight-email {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.sub-id-pill {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
     color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    display: inline-block;
 }
 
-.checkout-modal .form-group input {
-    width: 100%;
-    box-sizing: border-box;
+.sub-id-pill code {
+    color: var(--accent-2);
+    font-weight: 600;
 }
 
-/* btn-full utility (if not already defined) */
 .btn-full {
     width: 100%;
     justify-content: center;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
 }
