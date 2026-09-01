@@ -1287,6 +1287,10 @@ body {
     transition: opacity 0.25s ease;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .modal-overlay.hidden {
     display: none !important;
 }

@@ -1022,8 +1022,12 @@
         gtag('event', 'checkout_open', { event_category: 'Campaign' });
 
         if (checkoutData.idToken) {
-            goToStep(1);
+            document.getElementById('auth-unauthenticated').classList.add('hidden');
+            document.getElementById('auth-authenticated').classList.remove('hidden');
+            goToStep(0);
         } else {
+            document.getElementById('auth-authenticated').classList.add('hidden');
+            document.getElementById('auth-unauthenticated').classList.remove('hidden');
             goToStep(0);
             initGoogleGIS();
         }
@@ -1104,8 +1108,14 @@
     }
 
     function googleSignOut() {
+        var email = checkoutData.email;
         checkoutData = {};
-        if (window.google && window.google.accounts) {
+        if (window.google && window.google.accounts && window.google.accounts.id) {
+            if (email) {
+                try {
+                    google.accounts.id.revoke(email, function() {});
+                } catch(e) {}
+            }
             google.accounts.id.disableAutoSelect();
         }
         document.getElementById('co-business').value = '';
