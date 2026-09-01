@@ -1111,19 +1111,52 @@
     function googleSignOut() {
         var email = checkoutData.email;
         checkoutData = {};
+
+        // 1. Revoke Google grant and disable auto-select
         if (window.google && window.google.accounts && window.google.accounts.id) {
-            if (email) {
-                try {
-                    google.accounts.id.revoke(email, function() {});
-                } catch(e) {}
-            }
-            google.accounts.id.disableAutoSelect();
+            try {
+                if (email) google.accounts.id.revoke(email, function() {});
+            } catch(e) {}
+            try {
+                google.accounts.id.disableAutoSelect();
+            } catch(e) {}
         }
-        document.getElementById('co-business').value = '';
-        document.getElementById('co-description').value = '';
-        document.getElementById('auth-authenticated').classList.add('hidden');
-        document.getElementById('auth-unauthenticated').classList.remove('hidden');
+
+        // 2. Clear storage cache
+        try {
+            sessionStorage.clear();
+            localStorage.removeItem('nuri_user');
+            localStorage.removeItem('google_auto_signin');
+        } catch(e) {}
+
+        // 3. Clear all input fields and user details from DOM
+        var businessInput = document.getElementById('co-business');
+        if (businessInput) businessInput.value = '';
+        var descInput = document.getElementById('co-description');
+        if (descInput) descInput.value = '';
+
+        var userNameEl = document.getElementById('co-user-name');
+        if (userNameEl) userNameEl.textContent = '';
+        var userEmailEl = document.getElementById('co-user-email');
+        if (userEmailEl) userEmailEl.textContent = '';
+        var userAvatarEl = document.getElementById('co-user-avatar');
+        if (userAvatarEl) { userAvatarEl.src = ''; userAvatarEl.style.display = 'none'; }
+
+        var bizDisplay = document.getElementById('co-business-display');
+        if (bizDisplay) bizDisplay.textContent = '';
+        var bizSuccess = document.getElementById('co-business-success');
+        if (bizSuccess) bizSuccess.textContent = '';
+
+        // 4. Toggle auth UI visibility back to fresh unauthenticated state
+        var authAuth = document.getElementById('auth-authenticated');
+        if (authAuth) authAuth.classList.add('hidden');
+        var authUnauth = document.getElementById('auth-unauthenticated');
+        if (authUnauth) authUnauth.classList.remove('hidden');
+
+        // 5. Re-render fresh Google button
         renderGoogleButton();
+
+        // 6. Reset to step 0
         goToStep(0);
     }
 
