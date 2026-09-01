@@ -1201,12 +1201,19 @@
                 checkoutData.subscriptionId = data.subscriptionID;
 
                 goToStep(3);
-                document.getElementById('co-email-display').textContent = checkoutData.email;
-                document.getElementById('co-business-success').textContent = checkoutData.business || 'your business';
-                document.getElementById('co-sub-id').textContent = data.subscriptionID;
+
+                var bizEl = document.getElementById('co-business-success');
+                if (bizEl) bizEl.textContent = checkoutData.business || 'your business';
+
+                var subEl = document.getElementById('co-sub-id');
+                if (subEl) subEl.textContent = data.subscriptionID;
+
+                var emailEl = document.getElementById('co-email-display');
+                if (emailEl) emailEl.textContent = checkoutData.email;
 
                 spotsLeft = Math.max(0, spotsLeft - 1);
-                document.getElementById('spotsCount').textContent = spotsLeft;
+                var spotsEl = document.getElementById('spotsCount');
+                if (spotsEl) spotsEl.textContent = spotsLeft;
 
                 gtag('event', 'purchase', {
                     event_category: 'Campaign',
