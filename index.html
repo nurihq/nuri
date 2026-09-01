@@ -113,6 +113,13 @@
                 <li><a href="#contact" class="nav-cta"
                         onclick="gtag('event', 'click', { 'event_category': 'Navigation', 'event_label': 'Get in Touch' });">Get
                         in Touch</a></li>
+                <li>
+                    <button class="spots-badge" id="spotsBadge" onclick="openCheckout()"
+                        aria-label="Limited spots available — claim yours">
+                        <span class="spots-fire">🔥</span>
+                        <span id="spotsCount">…</span> spots left
+                    </button>
+                </li>
                 <li style="position: relative;" id="langDropdownContainer">
                     <button id="langToggle" class="lang-btn" aria-label="Select Language"
                         style="background:none; border:none; cursor:pointer; font-size:1.2rem; padding: 0.5rem; display: flex; align-items: center; gap: 4px;"
@@ -649,6 +656,11 @@
                         <h3>Ongoing Support</h3>
                         <p>Updates, improvements, and peace of mind — we're here long after launch day.</p>
                     </div>
+                    <div class="service-card reveal">
+                        <div class="service-icon">📊</div>
+                        <h3>Analytics &amp; Insights</h3>
+                        <p>Google Analytics built-in — see who visits, where they come from, and what drives conversions. Real data to grow smarter.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -818,7 +830,226 @@
         </div>
     </footer>
 
+
+    <!-- ══════════════════════════════════════════════════════
+         $1 WEBSITE CAMPAIGN — CHECKOUT MODAL
+         ══════════════════════════════════════════════════════ -->
+    <div id="checkoutModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+        <div class="modal-content checkout-modal">
+
+            <!-- Close -->
+            <button class="close-btn" id="closeCheckout" aria-label="Close checkout">&times;</button>
+
+            <!-- ── Step 1: Email capture ── -->
+            <div id="checkoutStep1">
+                <div class="checkout-badge">Limited Offer</div>
+                <div style="font-size:2.5rem; margin-bottom:0.5rem;">🌐</div>
+                <h3 id="checkoutTitle" style="font-size:1.5rem; font-weight:700; margin-bottom:0.25rem;">
+                    Claim Your <span style="color:var(--accent);">$1/mo</span> Website
+                </h3>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem; line-height:1.5;">
+                    We're building 1,000 custom websites for just $1/month.<br>
+                    <span id="spotsModalCount" style="color:var(--gold); font-weight:600;"></span>
+                </p>
+
+                <form id="checkoutForm" onsubmit="checkoutStep1Submit(event)">
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label for="co-name">Your Name</label>
+                        <input type="text" id="co-name" name="name" placeholder="Jane Smith" required />
+                    </div>
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label for="co-email">Email Address</label>
+                        <input type="email" id="co-email" name="email" placeholder="jane@yourbusiness.com" required />
+                    </div>
+                    <div class="form-group" style="margin-bottom:1.5rem;">
+                        <label for="co-business">Business Name</label>
+                        <input type="text" id="co-business" name="business" placeholder="Acme Co." />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span>Continue to Payment</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                </form>
+
+                <p style="font-size:0.75rem; color:var(--text-dim); margin-top:1rem; line-height:1.4;">
+                    Secure payment via PayPal. Cancel anytime after your site is live.
+                </p>
+            </div>
+
+            <!-- ── Step 2: PayPal payment ── -->
+            <div id="checkoutStep2" class="hidden">
+                <div style="font-size:2.5rem; margin-bottom:0.5rem;">✅</div>
+                <h3 style="font-size:1.4rem; font-weight:700; margin-bottom:0.25rem;">
+                    One more step, <span id="co-name-display" style="color:var(--accent);"></span>!
+                </h3>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.5rem; line-height:1.5;">
+                    Subscribe for just <strong style="color:var(--gold);">$1/month</strong> to lock in your spot.<br>
+                    We'll email you within 24h to collect your website brief.
+                </p>
+
+                <div class="checkout-plan-summary">
+                    <div class="plan-row"><span>Custom website build</span><span class="plan-price">Free</span></div>
+                    <div class="plan-row"><span>Hosting &amp; support</span><span class="plan-price">$1/mo</span></div>
+                    <div class="plan-row plan-total"><span>Today</span><span class="plan-price" style="color:var(--accent);">$1</span></div>
+                </div>
+
+                <div id="paypal-button-container-P-09F04539218525449NKLHRSA" style="margin-top:1rem;"></div>
+
+                <p style="font-size:0.75rem; color:var(--text-dim); margin-top:1rem; line-height:1.4;">
+                    Powered by PayPal. Cancel anytime after your site is delivered.
+                </p>
+            </div>
+
+            <!-- ── Step 3: Success ── -->
+            <div id="checkoutStep3" class="hidden">
+                <div style="font-size:3rem; margin-bottom:0.5rem;">🎉</div>
+                <h3 style="font-size:1.5rem; font-weight:700; margin-bottom:0.5rem;">You're in!</h3>
+                <p style="color:var(--text-muted); line-height:1.6; margin-bottom:0.75rem;">
+                    Your spot is secured. We'll email <span id="co-email-display" style="color:var(--accent);font-weight:600;"></span>
+                    within 24 hours to collect your website brief and get building.
+                </p>
+                <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1.5rem;">
+                    Subscription ID: <code id="co-sub-id" style="color:var(--accent-2);"></code>
+                </p>
+                <button class="btn btn-primary btn-full" onclick="closeCheckoutModal()">Done</button>
+            </div>
+
+        </div>
+    </div>
+
     <script src="nuri-core.js?v=2.1"></script>
+
+    <!-- ── Checkout + Spots Logic ─────────────────────────────── -->
+    <script>
+    // ── Config ────────────────────────────────────────────────────
+    // TODO: Replace with your deployed Lambda URLs after running deploy.sh
+    const RECORD_ORDER_URL = 'https://REPLACE_WITH_RECORD_ORDER_LAMBDA_URL/';
+    const GET_SPOTS_URL    = 'https://REPLACE_WITH_GET_SPOTS_LAMBDA_URL/';
+    const FALLBACK_SPOTS   = 947;  // shown if API is unreachable
+
+    // ── State ─────────────────────────────────────────────────────
+    let checkoutData = {};
+    let paypalLoaded = false;
+    let spotsLeft    = FALLBACK_SPOTS;
+
+    // ── Fetch live spots on page load ─────────────────────────────
+    (async () => {
+        try {
+            const res = await fetch(GET_SPOTS_URL);
+            if (res.ok) {
+                const data = await res.json();
+                spotsLeft = data.spotsLeft ?? FALLBACK_SPOTS;
+            }
+        } catch (e) {
+            // silent fallback
+        }
+        document.getElementById('spotsCount').textContent = spotsLeft;
+        gtag('event', 'spots_loaded', { value: spotsLeft });
+    })();
+
+    // ── Open / Close modal ────────────────────────────────────────
+    function openCheckout() {
+        document.getElementById('checkoutModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('spotsModalCount').textContent =
+            'Only ' + spotsLeft + ' of 1,000 spots remaining.';
+        gtag('event', 'checkout_open', { event_category: 'Campaign' });
+    }
+
+    function closeCheckoutModal() {
+        document.getElementById('checkoutModal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('closeCheckout').addEventListener('click', closeCheckoutModal);
+    document.getElementById('checkoutModal').addEventListener('click', function(e) {
+        if (e.target === this) closeCheckoutModal();
+    });
+
+    // ── Step 1: collect details ───────────────────────────────────
+    function checkoutStep1Submit(e) {
+        e.preventDefault();
+        checkoutData.name     = document.getElementById('co-name').value.trim();
+        checkoutData.email    = document.getElementById('co-email').value.trim();
+        checkoutData.business = document.getElementById('co-business').value.trim();
+
+        document.getElementById('co-name-display').textContent = checkoutData.name.split(' ')[0];
+
+        document.getElementById('checkoutStep1').classList.add('hidden');
+        document.getElementById('checkoutStep2').classList.remove('hidden');
+
+        gtag('event', 'checkout_step2', { event_category: 'Campaign', event_label: checkoutData.email });
+
+        // Lazy-load PayPal SDK only now
+        if (!paypalLoaded) {
+            paypalLoaded = true;
+            var s = document.createElement('script');
+            s.src = 'https://www.paypal.com/sdk/js?client-id=BAAM9vaLZKJNGcIFmZVOL3WHPvE9ZFes5uo9qPfvdq21K7Pawo9DbDdZaZGT50Ah_5LWrf_PDNiGD8v6CI&vault=true&intent=subscription';
+            s.setAttribute('data-sdk-integration-source', 'button-factory');
+            s.onload = renderPayPalButton;
+            document.head.appendChild(s);
+        } else {
+            renderPayPalButton();
+        }
+    }
+
+    // ── Step 2: render PayPal button ──────────────────────────────
+    function renderPayPalButton() {
+        var container = document.getElementById('paypal-button-container-P-09F04539218525449NKLHRSA');
+        container.innerHTML = '';
+
+        paypal.Buttons({
+            style: {
+                shape:  'rect',
+                color:  'gold',
+                layout: 'vertical',
+                label:  'subscribe',
+            },
+            createSubscription: function(data, actions) {
+                return actions.subscription.create({ plan_id: 'P-09F04539218525449NKLHRSA' });
+            },
+            onApprove: async function(data) {
+                checkoutData.subscriptionId = data.subscriptionID;
+
+                // Show success immediately
+                document.getElementById('checkoutStep2').classList.add('hidden');
+                document.getElementById('checkoutStep3').classList.remove('hidden');
+                document.getElementById('co-email-display').textContent = checkoutData.email;
+                document.getElementById('co-sub-id').textContent = data.subscriptionID;
+
+                // Decrement spots in UI
+                spotsLeft = Math.max(0, spotsLeft - 1);
+                document.getElementById('spotsCount').textContent = spotsLeft;
+
+                gtag('event', 'purchase', {
+                    event_category: 'Campaign',
+                    event_label: data.subscriptionID,
+                    value: 1,
+                    currency: 'USD',
+                });
+
+                // Record order in backend (fire-and-forget for UX)
+                try {
+                    await fetch(RECORD_ORDER_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(checkoutData),
+                    });
+                } catch (err) {
+                    console.warn('Order recording failed (non-critical):', err);
+                }
+            },
+            onError: function(err) {
+                console.error('PayPal error:', err);
+                gtag('event', 'checkout_error', { event_category: 'Campaign', event_label: String(err) });
+            },
+            onCancel: function() {
+                gtag('event', 'checkout_cancel', { event_category: 'Campaign' });
+            },
+        }).render('#paypal-button-container-P-09F04539218525449NKLHRSA');
+    }
+    </script>
+
 </body>
 
 </html>

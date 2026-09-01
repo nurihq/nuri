@@ -1331,3 +1331,121 @@ body {
         opacity: 1;
     }
 }
+/* ===========================
+   CAMPAIGN — Spots Badge
+   =========================== */
+
+.spots-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(139, 92, 246, 0.15));
+    border: 1px solid rgba(245, 158, 11, 0.45);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: var(--font);
+    padding: 6px 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+}
+
+.spots-badge:hover {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(139, 92, 246, 0.25));
+    border-color: var(--gold);
+    transform: scale(1.03);
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+}
+
+.spots-fire {
+    animation: spots-pulse 1.8s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes spots-pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.25); }
+}
+
+/* ===========================
+   CAMPAIGN — Checkout Modal
+   =========================== */
+
+.checkout-modal {
+    max-width: 440px;
+    width: 90vw;
+    text-align: center;
+    padding: 2.5rem 2rem;
+}
+
+.checkout-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #ec4899);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+}
+
+/* Plan summary box */
+.checkout-plan-summary {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.plan-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding: 0.3rem 0;
+}
+
+.plan-row + .plan-row {
+    border-top: 1px solid var(--border);
+}
+
+.plan-total {
+    font-weight: 700;
+    color: var(--text) !important;
+    margin-top: 0.25rem;
+    padding-top: 0.5rem;
+}
+
+.plan-price {
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* Form inside checkout modal */
+.checkout-modal .form-group label {
+    text-align: left;
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    color: var(--text-muted);
+}
+
+.checkout-modal .form-group input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* btn-full utility (if not already defined) */
+.btn-full {
+    width: 100%;
+    justify-content: center;
+}
