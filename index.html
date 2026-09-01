@@ -840,8 +840,8 @@
             <!-- Close -->
             <button class="close-btn" id="closeCheckout" aria-label="Close checkout">&times;</button>
 
-            <!-- ── Step 1: Email capture ── -->
-            <div id="checkoutStep1">
+            <!-- ── Step 0: Google Sign-In ── -->
+            <div id="checkoutStep0">
                 <div class="checkout-badge">Limited Offer</div>
                 <div style="font-size:2.5rem; margin-bottom:0.5rem;">🌐</div>
                 <h3 id="checkoutTitle" style="font-size:1.5rem; font-weight:700; margin-bottom:0.25rem;">
@@ -851,18 +851,33 @@
                     We're building 1,000 custom websites for just $1/month.<br>
                     <span id="spotsModalCount" style="color:var(--gold); font-weight:600;"></span>
                 </p>
+                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1.25rem;">
+                    Sign in with Google to claim your spot — no forms to fill.
+                </p>
+                <!-- Google Sign-In button rendered here by GIS -->
+                <div id="googleSignInBtn" style="display:flex; justify-content:center; margin-bottom:1rem;"></div>
+                <p style="font-size:0.75rem; color:var(--text-dim); line-height:1.4;">
+                    We only use your name and email to contact you about your website build.
+                </p>
+            </div>
 
+            <!-- ── Step 1: Business name (pre-filled from Google) ── -->
+            <div id="checkoutStep1" class="hidden">
+                <div style="display:flex; align-items:center; gap:12px; margin-bottom:1rem; justify-content:center;">
+                    <img id="co-avatar" src="" alt="" width="44" height="44"
+                        style="border-radius:50%; border:2px solid var(--accent); display:none;" />
+                    <div style="text-align:left;">
+                        <div style="font-weight:700; font-size:1rem;" id="co-welcome"></div>
+                        <div style="font-size:0.8rem; color:var(--text-muted);" id="co-email-shown"></div>
+                    </div>
+                </div>
+                <h3 style="font-size:1.3rem; font-weight:700; margin-bottom:0.5rem;">One last thing</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.25rem; line-height:1.5;">
+                    What's your business name? We'll use it when we reach out about your build.
+                </p>
                 <form id="checkoutForm" onsubmit="checkoutStep1Submit(event)">
-                    <div class="form-group" style="margin-bottom:1rem;">
-                        <label for="co-name">Your Name</label>
-                        <input type="text" id="co-name" name="name" placeholder="Jane Smith" required />
-                    </div>
-                    <div class="form-group" style="margin-bottom:1rem;">
-                        <label for="co-email">Email Address</label>
-                        <input type="email" id="co-email" name="email" placeholder="jane@yourbusiness.com" required />
-                    </div>
                     <div class="form-group" style="margin-bottom:1.5rem;">
-                        <label for="co-business">Business Name</label>
+                        <label for="co-business">Business Name <span style="color:var(--text-dim); font-weight:400;">(optional)</span></label>
                         <input type="text" id="co-business" name="business" placeholder="Acme Co." />
                     </div>
                     <button type="submit" class="btn btn-primary btn-full">
@@ -870,7 +885,6 @@
                         <span class="btn-icon">→</span>
                     </button>
                 </form>
-
                 <p style="font-size:0.75rem; color:var(--text-dim); margin-top:1rem; line-height:1.4;">
                     Secure payment via PayPal. Cancel anytime after your site is live.
                 </p>
@@ -917,20 +931,23 @@
         </div>
     </div>
 
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <script src="nuri-core.js?v=2.1"></script>
 
-    <!-- ── Checkout + Spots Logic ─────────────────────────────── -->
+    <!-- ── Checkout + Spots + Google Sign-In Logic ───────────── -->
     <script>
     // ── Config ────────────────────────────────────────────────────
-    // TODO: Replace with your deployed Lambda URLs after running deploy.sh
-    const RECORD_ORDER_URL = 'https://REPLACE_WITH_RECORD_ORDER_LAMBDA_URL/';
-    const GET_SPOTS_URL    = 'https://REPLACE_WITH_GET_SPOTS_LAMBDA_URL/';
-    const FALLBACK_SPOTS   = 947;  // shown if API is unreachable
+    const GOOGLE_CLIENT_ID  = '719377736713-0onfq9i7m3i0nkbbmmb4719mjp0evpj6.apps.googleusercontent.com';
+    const RECORD_ORDER_URL  = 'https://xmyaookeg5ymyqzzcnbwitpjxe0obuck.lambda-url.us-east-1.on.aws/';
+    const GET_SPOTS_URL     = 'https://dtymktzy3jwwbkzfoppdgjgqnm0akrfi.lambda-url.us-east-1.on.aws/';
+    const FALLBACK_SPOTS    = 947;
 
     // ── State ─────────────────────────────────────────────────────
-    let checkoutData = {};
-    let paypalLoaded = false;
-    let spotsLeft    = FALLBACK_SPOTS;
+    let checkoutData  = {};
+    let paypalLoaded  = false;
+    let spotsLeft     = FALLBACK_SPOTS;
 
     // ── Fetch live spots on page load ─────────────────────────────
     (async () => {
@@ -940,11 +957,8 @@
                 const data = await res.json();
                 spotsLeft = data.spotsLeft ?? FALLBACK_SPOTS;
             }
-        } catch (e) {
-            // silent fallback
-        }
+        } catch (e) { /* silent fallback */ }
         document.getElementById('spotsCount').textContent = spotsLeft;
-        gtag('event', 'spots_loaded', { value: spotsLeft });
     })();
 
     // ── Open / Close modal ────────────────────────────────────────
@@ -954,6 +968,11 @@
         document.getElementById('spotsModalCount').textContent =
             'Only ' + spotsLeft + ' of 1,000 spots remaining.';
         gtag('event', 'checkout_open', { event_category: 'Campaign' });
+
+        // Initialise Google Sign-In button when modal opens
+        if (window.google && !document.getElementById('googleSignInBtn').hasChildNodes()) {
+            renderGoogleButton();
+        }
     }
 
     function closeCheckoutModal() {
@@ -966,21 +985,70 @@
         if (e.target === this) closeCheckoutModal();
     });
 
-    // ── Step 1: collect details ───────────────────────────────────
+    // ── Google Sign-In ────────────────────────────────────────────
+    // Called by GIS once the library is loaded
+    function renderGoogleButton() {
+        google.accounts.id.initialize({
+            client_id: GOOGLE_CLIENT_ID,
+            callback: onGoogleSignIn,
+            auto_select: false,
+        });
+        google.accounts.id.renderButton(
+            document.getElementById('googleSignInBtn'),
+            {
+                theme: 'outline',
+                size: 'large',
+                shape: 'rectangular',
+                width: 280,
+                text: 'continue_with',
+            }
+        );
+    }
+
+    // GIS fires this after the user picks their Google account
+    function onGoogleSignIn(response) {
+        // Decode the JWT payload (no need to verify sig client-side — Lambda does that)
+        const payload = JSON.parse(atob(response.credential.split('.')[1]));
+        checkoutData.idToken  = response.credential;
+        checkoutData.name     = payload.name  || '';
+        checkoutData.email    = payload.email || '';
+        checkoutData.picture  = payload.picture || '';
+
+        // Populate step 1 UI
+        var avatar = document.getElementById('co-avatar');
+        if (checkoutData.picture) {
+            avatar.src = checkoutData.picture;
+            avatar.style.display = 'block';
+        }
+        document.getElementById('co-welcome').textContent   = 'Welcome, ' + checkoutData.name.split(' ')[0] + '!';
+        document.getElementById('co-email-shown').textContent = checkoutData.email;
+        document.getElementById('co-name-display').textContent = checkoutData.name.split(' ')[0];
+
+        // Advance to step 1
+        document.getElementById('checkoutStep0').classList.add('hidden');
+        document.getElementById('checkoutStep1').classList.remove('hidden');
+
+        gtag('event', 'checkout_google_signin', { event_category: 'Campaign', event_label: checkoutData.email });
+    }
+
+    // GIS library ready callback (called by the script onload via google.accounts)
+    window.addEventListener('load', function() {
+        // If modal is already open when GIS loads, render the button
+        if (!document.getElementById('checkoutModal').classList.contains('hidden')) {
+            renderGoogleButton();
+        }
+    });
+
+    // ── Step 1: business name only ────────────────────────────────
     function checkoutStep1Submit(e) {
         e.preventDefault();
-        checkoutData.name     = document.getElementById('co-name').value.trim();
-        checkoutData.email    = document.getElementById('co-email').value.trim();
         checkoutData.business = document.getElementById('co-business').value.trim();
-
-        document.getElementById('co-name-display').textContent = checkoutData.name.split(' ')[0];
 
         document.getElementById('checkoutStep1').classList.add('hidden');
         document.getElementById('checkoutStep2').classList.remove('hidden');
 
         gtag('event', 'checkout_step2', { event_category: 'Campaign', event_label: checkoutData.email });
 
-        // Lazy-load PayPal SDK only now
         if (!paypalLoaded) {
             paypalLoaded = true;
             var s = document.createElement('script');
@@ -993,31 +1061,24 @@
         }
     }
 
-    // ── Step 2: render PayPal button ──────────────────────────────
+    // ── Step 2: PayPal ────────────────────────────────────────────
     function renderPayPalButton() {
         var container = document.getElementById('paypal-button-container-P-09F04539218525449NKLHRSA');
         container.innerHTML = '';
 
         paypal.Buttons({
-            style: {
-                shape:  'rect',
-                color:  'gold',
-                layout: 'vertical',
-                label:  'subscribe',
-            },
+            style: { shape:'rect', color:'gold', layout:'vertical', label:'subscribe' },
             createSubscription: function(data, actions) {
                 return actions.subscription.create({ plan_id: 'P-09F04539218525449NKLHRSA' });
             },
             onApprove: async function(data) {
                 checkoutData.subscriptionId = data.subscriptionID;
 
-                // Show success immediately
                 document.getElementById('checkoutStep2').classList.add('hidden');
                 document.getElementById('checkoutStep3').classList.remove('hidden');
                 document.getElementById('co-email-display').textContent = checkoutData.email;
                 document.getElementById('co-sub-id').textContent = data.subscriptionID;
 
-                // Decrement spots in UI
                 spotsLeft = Math.max(0, spotsLeft - 1);
                 document.getElementById('spotsCount').textContent = spotsLeft;
 
@@ -1028,7 +1089,6 @@
                     currency: 'USD',
                 });
 
-                // Record order in backend (fire-and-forget for UX)
                 try {
                     await fetch(RECORD_ORDER_URL, {
                         method: 'POST',
@@ -1039,13 +1099,8 @@
                     console.warn('Order recording failed (non-critical):', err);
                 }
             },
-            onError: function(err) {
-                console.error('PayPal error:', err);
-                gtag('event', 'checkout_error', { event_category: 'Campaign', event_label: String(err) });
-            },
-            onCancel: function() {
-                gtag('event', 'checkout_cancel', { event_category: 'Campaign' });
-            },
+            onError:  function(err) { console.error('PayPal error:', err); },
+            onCancel: function()    { gtag('event', 'checkout_cancel', { event_category: 'Campaign' }); },
         }).render('#paypal-button-container-P-09F04539218525449NKLHRSA');
     }
     </script>
