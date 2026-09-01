@@ -843,21 +843,41 @@
             <!-- ── Step 0: Google Sign-In ── -->
             <div id="checkoutStep0">
                 <div class="checkout-badge">Limited Offer</div>
-                <div style="font-size:2.5rem; margin-bottom:0.5rem;">🌐</div>
-                <h3 id="checkoutTitle" style="font-size:1.5rem; font-weight:700; margin-bottom:0.25rem;">
+                <div style="font-size:2.2rem; margin-bottom:0.25rem;">🌐</div>
+                <h3 id="checkoutTitle" style="font-size:1.4rem; font-weight:700; margin-bottom:0.25rem;">
                     Claim Your <span style="color:var(--accent);">$1/mo</span> Website
                 </h3>
-                <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem; line-height:1.5;">
+                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem; line-height:1.4;">
                     We're building 1,000 custom websites for just $1/month.<br>
                     <span id="spotsModalCount" style="color:var(--gold); font-weight:600;"></span>
                 </p>
-                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1.25rem;">
-                    Sign in with Google to claim your spot — no forms to fill.
+                <p style="color:var(--text); font-size:0.85rem; font-weight:500; margin-bottom:1rem;">
+                    Sign in with Google to claim your spot:
                 </p>
-                <!-- Google Sign-In button rendered here by GIS -->
-                <div id="googleSignInBtn" style="display:flex; justify-content:center; margin-bottom:1rem;"></div>
-                <p style="font-size:0.75rem; color:var(--text-dim); line-height:1.4;">
-                    We only use your name and email to contact you about your website build.
+
+                <!-- Declarative Google Identity Services container -->
+                <div id="g_id_onload"
+                     data-client_id="719377736713-0onfq9i7m3i0nkbbmmb4719mjp0evpj6.apps.googleusercontent.com"
+                     data-callback="onGoogleSignIn"
+                     data-auto_prompt="false">
+                </div>
+                <div style="display:flex; justify-content:center; min-height:44px; margin-bottom:1rem;">
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-shape="rectangular"
+                         data-theme="outline"
+                         data-text="continue_with"
+                         data-size="large"
+                         data-logo_alignment="left"
+                         data-width="280">
+                    </div>
+                </div>
+
+                <!-- Fallback programmatic container -->
+                <div id="googleSignInBtn" style="display:flex; justify-content:center;"></div>
+
+                <p style="font-size:0.75rem; color:var(--text-dim); margin-top:0.75rem; line-height:1.4;">
+                    🔒 Instant signup with your Google account. No passwords or long forms.
                 </p>
             </div>
 
@@ -932,7 +952,7 @@
     </div>
 
     <!-- Google Identity Services -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer onload="initGoogleGIS()"></script>
 
     <script src="nuri-core.js?v=2.1"></script>
 
@@ -969,10 +989,8 @@
             'Only ' + spotsLeft + ' of 1,000 spots remaining.';
         gtag('event', 'checkout_open', { event_category: 'Campaign' });
 
-        // Initialise Google Sign-In button when modal opens
-        if (window.google && !document.getElementById('googleSignInBtn').hasChildNodes()) {
-            renderGoogleButton();
-        }
+        // Initialise Google Sign-In button
+        initGoogleGIS();
     }
 
     function closeCheckoutModal() {
@@ -986,23 +1004,37 @@
     });
 
     // ── Google Sign-In ────────────────────────────────────────────
-    // Called by GIS once the library is loaded
+    function initGoogleGIS() {
+        if (window.google && window.google.accounts) {
+            renderGoogleButton();
+        }
+    }
+
     function renderGoogleButton() {
-        google.accounts.id.initialize({
-            client_id: GOOGLE_CLIENT_ID,
-            callback: onGoogleSignIn,
-            auto_select: false,
-        });
-        google.accounts.id.renderButton(
-            document.getElementById('googleSignInBtn'),
-            {
-                theme: 'outline',
-                size: 'large',
-                shape: 'rectangular',
-                width: 280,
-                text: 'continue_with',
+        if (!window.google || !window.google.accounts) return;
+        try {
+            google.accounts.id.initialize({
+                client_id: GOOGLE_CLIENT_ID,
+                callback: onGoogleSignIn,
+                auto_select: false,
+            });
+            var container = document.getElementById('googleSignInBtn');
+            if (container) {
+                container.innerHTML = '';
+                google.accounts.id.renderButton(
+                    container,
+                    {
+                        theme: 'outline',
+                        size: 'large',
+                        shape: 'rectangular',
+                        width: 280,
+                        text: 'continue_with',
+                    }
+                );
             }
-        );
+        } catch (e) {
+            console.error('Google GIS error:', e);
+        }
     }
 
     // GIS fires this after the user picks their Google account
@@ -1031,12 +1063,8 @@
         gtag('event', 'checkout_google_signin', { event_category: 'Campaign', event_label: checkoutData.email });
     }
 
-    // GIS library ready callback (called by the script onload via google.accounts)
     window.addEventListener('load', function() {
-        // If modal is already open when GIS loads, render the button
-        if (!document.getElementById('checkoutModal').classList.contains('hidden')) {
-            renderGoogleButton();
-        }
+        initGoogleGIS();
     });
 
     // ── Step 1: business name only ────────────────────────────────
